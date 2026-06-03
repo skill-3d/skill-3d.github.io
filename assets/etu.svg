@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520">
+  <rect width="720" height="520" rx="24" fill="#ffffff"/>
+  <text x="360" y="46" text-anchor="middle" font-family="Inter,Arial" font-size="26" font-weight="900" fill="#294d78">Effective Tool Usage</text>
+  <g transform="translate(70,88)" font-family="Inter,Arial">
+    <g stroke="#d8e4ef"><line x1="0" y1="350" x2="570" y2="350"/><line x1="0" y1="262" x2="570" y2="262"/><line x1="0" y1="175" x2="570" y2="175"/><line x1="0" y1="88" x2="570" y2="88"/></g>
+    <g font-size="14" font-weight="700" fill="#64748b"><text x="-26" y="354">0</text><text x="-34" y="266">25</text><text x="-34" y="179">50</text><text x="-34" y="92">75</text></g>
+    <g>
+      <rect x="55" y="213" width="52" height="137" fill="#e3f0fa"/><rect x="113" y="146" width="52" height="204" fill="#69aed4"/><rect x="171" y="73" width="52" height="277" fill="#294d78"/>
+      <rect x="335" y="223" width="52" height="127" fill="#e3f0fa"/><rect x="393" y="160" width="52" height="190" fill="#69aed4"/><rect x="451" y="72" width="52" height="278" fill="#294d78"/>
+    </g>
+    <g font-size="15" font-weight="800" fill="#122238"><text x="139" y="385" text-anchor="middle">VSI</text><text x="419" y="385" text-anchor="middle">BLINK</text></g>
+    <g font-size="13" font-weight="800" fill="#294d78"><text x="195" y="63">78.7%</text><text x="475" y="62">79.2%</text></g>
+  </g>
+</svg>

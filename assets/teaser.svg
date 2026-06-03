@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 520">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1"><stop stop-color="#e3f0fa"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#1d3557" flood-opacity="0.15"/></filter>
+  </defs>
+  <rect width="980" height="520" fill="url(#g)" rx="28"/>
+  <text x="490" y="54" text-anchor="middle" font-family="Inter,Arial" font-size="28" font-weight="800" fill="#294d78">Scene-Aware Tool Use for 3D Spatial Reasoning</text>
+  <g filter="url(#s)">
+    <rect x="52" y="104" width="260" height="290" rx="22" fill="#fff" stroke="#d8e4ef"/>
+    <text x="182" y="142" text-anchor="middle" font-family="Inter,Arial" font-size="22" font-weight="800" fill="#294d78">Previous Methods</text>
+    <rect x="82" y="172" width="200" height="58" rx="14" fill="#e3f0fa"/>
+    <text x="182" y="207" text-anchor="middle" font-family="Inter,Arial" font-size="18" font-weight="700" fill="#122238">Uniform tools</text>
+    <rect x="82" y="250" width="200" height="58" rx="14" fill="#69aed4" opacity="0.32"/>
+    <text x="182" y="285" text-anchor="middle" font-family="Inter,Arial" font-size="18" font-weight="700" fill="#122238">Mismatched evidence</text>
+    <text x="182" y="352" text-anchor="middle" font-family="Inter,Arial" font-size="46" font-weight="900" fill="#ef4444">✕</text>
+  </g>
+  <g filter="url(#s)">
+    <rect x="365" y="104" width="250" height="290" rx="22" fill="#fff" stroke="#d8e4ef"/>
+    <text x="490" y="142" text-anchor="middle" font-family="Inter,Arial" font-size="22" font-weight="800" fill="#294d78">Skill-3D</text>
+    <rect x="400" y="174" width="180" height="52" rx="14" fill="#294d78"/>
+    <text x="490" y="207" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="800" fill="#fff">Scene Memory</text>
+    <rect x="400" y="246" width="180" height="52" rx="14" fill="#69aed4"/>
+    <text x="490" y="279" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="800" fill="#fff">Skill Library</text>
+    <rect x="400" y="318" width="180" height="52" rx="14" fill="#e3f0fa" stroke="#69aed4"/>
+    <text x="490" y="351" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="800" fill="#294d78">Tool Workflow</text>
+  </g>
+  <g filter="url(#s)">
+    <rect x="668" y="104" width="260" height="290" rx="22" fill="#fff" stroke="#d8e4ef"/>
+    <text x="798" y="142" text-anchor="middle" font-family="Inter,Arial" font-size="22" font-weight="800" fill="#294d78">Evidence</text>
+    <circle cx="730" cy="216" r="42" fill="#e3f0fa" stroke="#69aed4" stroke-width="3"/>
+    <text x="730" y="223" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="800" fill="#294d78">Depth</text>
+    <circle cx="865" cy="216" r="42" fill="#69aed4"/>
+    <text x="865" y="223" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="800" fill="#fff">Detect</text>
+    <circle cx="798" cy="318" r="42" fill="#294d78"/>
+    <text x="798" y="325" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="800" fill="#fff">3D</text>
+  </g>
+  <path d="M315 250 C340 250 340 250 365 250" stroke="#294d78" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M615 250 C640 250 640 250 665 250" stroke="#294d78" stroke-width="5" fill="none"/>
+</svg>

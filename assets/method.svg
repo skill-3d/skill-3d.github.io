@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520">
+  <rect width="1200" height="520" rx="30" fill="#ffffff"/>
+  <rect x="26" y="28" width="360" height="464" rx="24" fill="#e3f0fa" stroke="#d8e4ef"/>
+  <rect x="420" y="28" width="360" height="464" rx="24" fill="#f7fbff" stroke="#d8e4ef"/>
+  <rect x="814" y="28" width="360" height="464" rx="24" fill="#e3f0fa" stroke="#d8e4ef"/>
+  <text x="206" y="74" text-anchor="middle" font-family="Inter,Arial" font-size="25" font-weight="900" fill="#294d78">(a) Skill Extraction</text>
+  <text x="600" y="74" text-anchor="middle" font-family="Inter,Arial" font-size="25" font-weight="900" fill="#294d78">(b) Skill-Guided Inference</text>
+  <text x="994" y="74" text-anchor="middle" font-family="Inter,Arial" font-size="25" font-weight="900" fill="#294d78">(c) Agentic Post-Training</text>
+  <g font-family="Inter,Arial" font-size="19" font-weight="750" fill="#122238">
+    <rect x="72" y="116" width="268" height="54" rx="14" fill="#fff" stroke="#69aed4"/><text x="206" y="150" text-anchor="middle">Tool-Usage Trajectories</text>
+    <rect x="72" y="202" width="268" height="54" rx="14" fill="#fff" stroke="#69aed4"/><text x="206" y="236" text-anchor="middle">Scene Memory</text>
+    <rect x="72" y="288" width="268" height="54" rx="14" fill="#fff" stroke="#69aed4"/><text x="206" y="322" text-anchor="middle">Skill Library</text>
+    <text x="206" y="390" text-anchor="middle" fill="#294d78">Success → Workflow</text>
+    <text x="206" y="424" text-anchor="middle" fill="#294d78">Failure → Lessons</text>
+  </g>
+  <g font-family="Inter,Arial" font-size="19" font-weight="750" fill="#122238">
+    <rect x="466" y="116" width="268" height="54" rx="14" fill="#fff" stroke="#69aed4"/><text x="600" y="150" text-anchor="middle">Scene-Task Context</text>
+    <rect x="466" y="202" width="268" height="54" rx="14" fill="#fff" stroke="#69aed4"/><text x="600" y="236" text-anchor="middle">Top-k Skill Retrieval</text>
+    <rect x="466" y="288" width="268" height="54" rx="14" fill="#fff" stroke="#69aed4"/><text x="600" y="322" text-anchor="middle">Skill Selection</text>
+    <rect x="466" y="374" width="268" height="54" rx="14" fill="#294d78"/><text x="600" y="408" text-anchor="middle" fill="#fff">Tool-Use Workflow</text>
+  </g>
+  <g font-family="Inter,Arial" font-size="19" font-weight="750" fill="#122238">
+    <rect x="860" y="116" width="268" height="54" rx="14" fill="#fff" stroke="#69aed4"/><text x="994" y="150" text-anchor="middle">Agentic SFT</text>
+    <rect x="860" y="202" width="268" height="54" rx="14" fill="#fff" stroke="#69aed4"/><text x="994" y="236" text-anchor="middle">GRPO</text>
+    <rect x="860" y="288" width="268" height="54" rx="14" fill="#fff" stroke="#69aed4"/><text x="994" y="322" text-anchor="middle">Answer Reward</text>
+    <rect x="860" y="374" width="268" height="54" rx="14" fill="#294d78"/><text x="994" y="408" text-anchor="middle" fill="#fff">Tool-Use Reward</text>
+  </g>
+</svg>
