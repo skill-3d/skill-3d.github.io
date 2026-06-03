@@ -5,17 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skill-3D: Evolving Scene-Aware Skills for Agentic 3D Spatial Reasoning</title>
   <meta name="description" content="Skill-3D learns evolving scene-aware skills for agentic 3D spatial reasoning through Scene Memory, Skill Library evolution, skill-guided inference, and agentic post-training." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="site-header">
     <nav class="nav container">
       <a class="brand" href="#top">Skill-3D</a>
-      <div class="nav-links">
+      <div class="nav-links" aria-label="Primary navigation">
         <a href="#overview">Overview</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
         <a href="#analysis">Analysis</a>
+        <a href="#cases">Cases</a>
         <a href="#bibtex">BibTeX</a>
       </div>
     </nav>
@@ -23,18 +27,97 @@
 
   <main id="top">
     <section class="hero">
-      <div class="container hero-inner">
-        <p class="eyebrow">Agentic 3D Spatial Reasoning</p>
-        <h1>Skill-3D: Evolving Scene-Aware Skills for Agentic 3D Spatial Reasoning</h1>
-        <p class="subtitle">
-          Skill-3D constructs a Scene Memory and co-evolves a Skill Library to guide MLLM agents toward task-specific tool use, evidence acquisition, and spatial reasoning.
-        </p>
-        <p class="authors">Anonymous Authors</p>
-        <div class="button-row">
-          <a class="button primary" href="#">Paper</a>
-          <a class="button" href="#">Code</a>
-          <a class="button" href="#">Data</a>
-          <a class="button" href="#bibtex">Citation</a>
+      <div class="hero-inner container">
+        <div class="hero-copy">
+          <p class="eyebrow">Agentic 3D Spatial Reasoning</p>
+          <h1>Skill-3D</h1>
+          <h2>Evolving Scene-Aware Skills for Agentic 3D Spatial Reasoning</h2>
+          <p class="subtitle">
+            Skill-3D builds a Scene Memory from tool-use rollouts, evolves a Skill Library from successful workflows and failure lessons, and trains compact MLLM agents to select task-relevant tools for evidence-grounded 3D reasoning.
+          </p>
+          <p class="authors">Anonymous EMNLP Submission</p>
+          <div class="button-row" aria-label="Project links">
+            <a class="button primary" href="#">Paper</a>
+            <a class="button" href="#">Code</a>
+            <a class="button" href="#">Dataset</a>
+            <a class="button" href="#bibtex">BibTeX</a>
+          </div>
+        </div>
+
+        <div class="hero-visual skillopt-hero-visual" aria-label="Skill-3D scene-aware skill loop illustration">
+          <div class="visual-shell">
+            <div class="visual-topbar">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+              <span class="topbar-title">Skill-3D Scene-Aware Skill Loop</span>
+            </div>
+
+            <div class="visual-grid">
+              <div class="visual-left">
+                <div class="stage-card stage-input">
+                  <div class="stage-kicker">01 / Scene &amp; Task</div>
+                  <div class="stage-title">3D Spatial Query</div>
+                  <p>Identify task type, target objects, scene signature, and required evidence.</p>
+                </div>
+
+                <div class="flow-arrow">↓</div>
+
+                <div class="stage-card stage-memory">
+                  <div class="stage-kicker">02 / Scene Memory</div>
+                  <div class="stage-title">Rollout Evidence</div>
+                  <p>Store scene context, tool calls, valid evidence, and failure patterns.</p>
+                </div>
+
+                <div class="flow-arrow">↓</div>
+
+                <div class="stage-card stage-skill">
+                  <div class="stage-kicker">03 / Skill Library</div>
+                  <div class="stage-title">Workflow + Lessons</div>
+                  <p>Distill successful rollouts into skills and attach failures as lessons.</p>
+                </div>
+              </div>
+
+              <div class="visual-center">
+                <div class="loop-ring">
+                  <div class="loop-node node-a">Retrieve</div>
+                  <div class="loop-node node-b">Select</div>
+                  <div class="loop-node node-c">Use Tools</div>
+                  <div class="loop-node node-d">Refine</div>
+
+                  <div class="center-core">
+                    <span>Skill-3D</span>
+                    <strong>Co-Evolving<br />Skills</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="visual-right">
+                <div class="mini-panel">
+                  <div class="mini-label">Tool-Use Quality</div>
+                  <div class="metric-row">
+                    <span>ETU</span>
+                    <strong>78.7%</strong>
+                  </div>
+                  <div class="metric-bar">
+                    <span style="width: 78.7%;"></span>
+                  </div>
+                </div>
+
+                <div class="mini-panel">
+                  <div class="mini-label">Skill Retrieval</div>
+                  <div class="skill-pill static">#st_01 · Counting</div>
+                  <div class="skill-pill dynamic">#dy_06 · Depth-Distance</div>
+                  <div class="skill-pill dynamic">#dy_12 · Multi-view Dedup</div>
+                </div>
+
+                <div class="mini-panel answer-panel">
+                  <div class="mini-label">Evidence-Grounded Answer</div>
+                  <p>Tools are selected according to task-specific evidence requirements.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -143,7 +226,7 @@
       </div>
     </section>
 
-    <section class="section container">
+    <section id="cases" class="section container">
       <div class="section-heading">
         <p class="eyebrow">Qualitative Cases</p>
         <h2>Scene-aware skills resolve tool-use failure modes.</h2>
