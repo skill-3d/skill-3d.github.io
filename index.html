@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skill-3D: Evolving Scene-Aware Skills for Agentic 3D Spatial Reasoning</title>
+  <meta name="description" content="Skill-3D learns evolving scene-aware skills for agentic 3D spatial reasoning through Scene Memory, Skill Library evolution, skill-guided inference, and agentic post-training." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="#top">Skill-3D</a>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#analysis">Analysis</a>
+        <a href="#bibtex">BibTeX</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="eyebrow">Agentic 3D Spatial Reasoning</p>
+        <h1>Skill-3D: Evolving Scene-Aware Skills for Agentic 3D Spatial Reasoning</h1>
+        <p class="subtitle">
+          Skill-3D constructs a Scene Memory and co-evolves a Skill Library to guide MLLM agents toward task-specific tool use, evidence acquisition, and spatial reasoning.
+        </p>
+        <p class="authors">Anonymous Authors</p>
+        <div class="button-row">
+          <a class="button primary" href="#">Paper</a>
+          <a class="button" href="#">Code</a>
+          <a class="button" href="#">Data</a>
+          <a class="button" href="#bibtex">Citation</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats container" aria-label="Key results">
+      <div class="stat-card">
+        <span class="stat-value">32% → 78%</span>
+        <span class="stat-label">Effective Tool Usage on VSI-Bench</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">+67%</span>
+        <span class="stat-label">Gemini-3-Flash gain on MMSI-Bench</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">+43%</span>
+        <span class="stat-label">Qwen3-VL-8B gain on VSI-Bench</span>
+      </div>
+    </section>
+
+    <section id="overview" class="section container">
+      <div class="section-heading">
+        <p class="eyebrow">Motivation</p>
+        <h2>Tool availability is not enough.</h2>
+      </div>
+      <div class="two-col">
+        <div>
+          <p>
+            Existing tool-augmented MLLM agents often apply uniform tool-use patterns across heterogeneous indoor scenes. This can lead to biased tool preferences, mismatched evidence, and marginal gains over non-agentic baselines.
+          </p>
+          <p>
+            Skill-3D addresses this by learning scene-aware skills that encode when to use detection, depth estimation, segmentation, 3D reconstruction, orientation estimation, or combinations of these tools.
+          </p>
+        </div>
+        <figure class="figure-card">
+          <img src="assets/teaser.svg" alt="Skill-3D motivation and overview" />
+          <figcaption>Scene-aware skills route each query to task-relevant tool workflows.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="method" class="section tinted">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Method</p>
+          <h2>Scene Memory, Skill Library, and skill-guided post-training.</h2>
+        </div>
+        <figure class="wide-figure">
+          <img src="assets/method.svg" alt="Skill-3D method overview" />
+        </figure>
+        <div class="cards three">
+          <article class="card">
+            <h3>Scene-Aware Skill Extraction</h3>
+            <p>Successful rollouts are distilled into reusable workflows. Failed rollouts are attached as lessons and converted into fallback rules when they provide reliable corrections.</p>
+          </article>
+          <article class="card">
+            <h3>Skill-Guided Inference</h3>
+            <p>Given a query, Skill-3D retrieves candidate static and dynamic skills, selects a compact subset, and uses them to guide evidence acquisition and final reasoning.</p>
+          </article>
+          <article class="card">
+            <h3>Agentic Post-Training</h3>
+            <p>Skill-guided trajectories supervise compact MLLM agents through agentic SFT and GRPO, teaching them to select skills, call tools, and ground answers in evidence.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="results" class="section container">
+      <div class="section-heading">
+        <p class="eyebrow">Results</p>
+        <h2>Consistent gains across closed- and open-source agents.</h2>
+      </div>
+      <div class="two-col">
+        <figure class="figure-card">
+          <img src="assets/results_radar.svg" alt="Radar chart showing Skill-3D improvements" />
+          <figcaption>Skill-3D improves representative spatial reasoning dimensions.</figcaption>
+        </figure>
+        <div class="result-list">
+          <div class="result-item">
+            <h3>Closed-source agents</h3>
+            <p>Skill-3D outperforms non-agentic, direct tool-use, and Think3D baselines across GPT-4o, GPT-5.4, Gemini-2.5-Pro, and Gemini-3-Flash.</p>
+          </div>
+          <div class="result-item">
+            <h3>Open-source agents</h3>
+            <p>Skill-guided post-training transfers to compact Qwen3-VL-4B/8B agents and improves skill selection, tool use, and evidence-grounded answering.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="analysis" class="section tinted">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Analysis</p>
+          <h2>Skill-3D improves tool-use quality, not just tool-call frequency.</h2>
+        </div>
+        <div class="cards two">
+          <figure class="figure-card">
+            <img src="assets/etu.svg" alt="Effective tool usage bar charts" />
+            <figcaption>Effective Tool Usage improves across VSI-Bench, BLINK, CV-3D, and MMSI-Bench.</figcaption>
+          </figure>
+          <figure class="figure-card">
+            <img src="assets/tool_distribution.svg" alt="Tool distribution charts" />
+            <figcaption>Tool usage becomes more task-aligned for depth/distance/size and direction reasoning tasks.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="section-heading">
+        <p class="eyebrow">Qualitative Cases</p>
+        <h2>Scene-aware skills resolve tool-use failure modes.</h2>
+      </div>
+      <div class="cards two">
+        <article class="card">
+          <h3>Metric distance estimation</h3>
+          <p>Skill-3D retrieves a depth-distance skill and combines 3D reconstruction, object detection, and depth estimation to ground closest-point distance.</p>
+        </article>
+        <article class="card">
+          <h3>Multi-view object counting</h3>
+          <p>Skill-3D retrieves a detection-counting skill and suppresses repeated object appearances across views using layout consistency and detection evidence.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="bibtex" class="section container">
+      <div class="section-heading">
+        <p class="eyebrow">Citation</p>
+        <h2>BibTeX</h2>
+      </div>
+      <pre class="bibtex"><code>@inproceedings{skill3d2026,
+  title     = {Skill-3D: Evolving Scene-Aware Skills for Agentic 3D Spatial Reasoning},
+  author    = {Anonymous Authors},
+  booktitle = {EMNLP},
+  year      = {2026}
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Skill-3D Project Page. Replace placeholder links, figures, and citation with the camera-ready version.</p>
+    </div>
+  </footer>
+</body>
+</html>
