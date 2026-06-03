@@ -783,3 +783,73 @@ h1 {
     font-size: 18px;
   }
 }
+/* ==============================
+   Wider Hero Layout
+   ============================== */
+
+   .hero {
+    padding: 72px 0 56px;
+  }
+  
+  .skillopt-hero-visual {
+    width: min(1440px, calc(100% - 48px));
+    margin: 0 auto;
+    min-height: 620px;
+  }
+  
+  .visual-shell {
+    width: 100%;
+    max-width: 1440px;
+    border-radius: 34px;
+  }
+  
+  .visual-grid {
+    grid-template-columns: 0.9fr 1.45fr 1fr;
+    gap: 36px;
+    padding: 48px 56px 54px;
+    min-height: 600px;
+  }
+  
+  .loop-ring {
+    width: 380px;
+    height: 380px;
+  }
+  
+  .center-core {
+    inset: 98px;
+  }
+  
+  .center-core strong {
+    font-size: 27px;
+  }
+  
+  .loop-node {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+  
+  .stage-card {
+    padding: 22px 22px 20px;
+  }
+  
+  .stage-title {
+    font-size: 20px;
+  }
+  
+  .stage-card p,
+  .answer-panel p {
+    font-size: 15px;
+  }
+  
+  .mini-panel {
+    padding: 22px;
+  }
+  
+  .metric-row strong {
+    font-size: 46px;
+  }
+  
+  .skill-pill {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
