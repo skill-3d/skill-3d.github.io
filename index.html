@@ -12,7 +12,7 @@
 </head>
 <body>
   <header class="site-header">
-    <nav class="nav container">
+    <nav class="nav container-wide">
       <a class="brand" href="#top">Skill-3D</a>
       <div class="nav-links" aria-label="Primary navigation">
         <a href="#overview">Overview</a>
@@ -27,94 +27,73 @@
 
   <main id="top">
     <section class="hero">
-      <div class="hero-inner container">
+      <div class="hero-inner container-wide">
         <div class="hero-copy">
           <p class="eyebrow">Agentic 3D Spatial Reasoning</p>
           <h1>Skill-3D</h1>
           <h2>Evolving Scene-Aware Skills for Agentic 3D Spatial Reasoning</h2>
-          <p class="subtitle">
-            Skill-3D builds a Scene Memory from tool-use rollouts, evolves a Skill Library from successful workflows and failure lessons, and trains compact MLLM agents to select task-relevant tools for evidence-grounded 3D reasoning.
-          </p>
-          <p class="authors">Anonymous EMNLP Submission</p>
+          <div class="author-block">
+            <p class="author-names">
+              <a href="https://scholar.google.com/citations?user=BHZ_FeYAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Haoyuan Li</a><sup>1</sup>,
+              <a href="https://scholar.google.com/citations?user=Udl0uiMAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer">Zhengdong Hu</a><sup>2</sup>,
+              Jun Wang<sup>3</sup>,
+              <a href="https://scholar.google.com/citations?user=hVuflMQAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer">Hehe Fan</a><sup>1</sup>,
+              <a href="https://scholar.google.com/citations?user=RMSuNFwAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer">Yi Yang</a><sup>1*</sup>
+            </p>
+            <p class="affiliations">
+              <sup>1</sup>Zhejiang University<br />
+              <sup>2</sup>University of Technology Sydney<br />
+              <sup>3</sup>OPPO Research Institute
+            </p>
+            <p class="corresponding"><sup>*</sup>Corresponding author.</p>
+          </div>
           <div class="button-row" aria-label="Project links">
             <a class="button primary" href="#">Paper</a>
             <a class="button" href="#">Code</a>
-            <a class="button" href="#">Dataset</a>
             <a class="button" href="#bibtex">BibTeX</a>
           </div>
         </div>
 
-        <div class="hero-visual skillopt-hero-visual" aria-label="Skill-3D scene-aware skill loop illustration">
-          <div class="visual-shell">
-            <div class="visual-topbar">
+        <div class="hero-visual compact-skill-loop" aria-label="Skill-3D scene-aware skill loop illustration">
+          <div class="compact-shell">
+            <div class="compact-topbar">
               <span class="dot dot-red"></span>
               <span class="dot dot-yellow"></span>
               <span class="dot dot-green"></span>
-              <span class="topbar-title">Skill-3D Scene-Aware Skill Loop</span>
+              <span class="compact-title">Skill-3D Evolving Loop</span>
             </div>
-
-            <div class="visual-grid">
-              <div class="visual-left">
-                <div class="stage-card stage-input">
-                  <div class="stage-kicker">01 / Scene &amp; Task</div>
-                  <div class="stage-title">3D Spatial Query</div>
-                  <p>Identify task type, target objects, scene signature, and required evidence.</p>
-                </div>
-
-                <div class="flow-arrow">↓</div>
-
-                <div class="stage-card stage-memory">
-                  <div class="stage-kicker">02 / Scene Memory</div>
-                  <div class="stage-title">Rollout Evidence</div>
-                  <p>Store scene context, tool calls, valid evidence, and failure patterns.</p>
-                </div>
-
-                <div class="flow-arrow">↓</div>
-
-                <div class="stage-card stage-skill">
-                  <div class="stage-kicker">03 / Skill Library</div>
-                  <div class="stage-title">Workflow + Lessons</div>
-                  <p>Distill successful rollouts into skills and attach failures as lessons.</p>
-                </div>
+            <div class="compact-body">
+              <div class="compact-card c-scene">
+                <span class="step">01</span>
+                <h3>Scene &amp; Task</h3>
+                <p>Query type · target objects · required evidence</p>
               </div>
-
-              <div class="visual-center">
-                <div class="loop-ring">
-                  <div class="loop-node node-a">Retrieve</div>
-                  <div class="loop-node node-b">Select</div>
-                  <div class="loop-node node-c">Use Tools</div>
-                  <div class="loop-node node-d">Refine</div>
-
-                  <div class="center-core">
+              <div class="compact-card c-memory">
+                <span class="step">02</span>
+                <h3>Scene Memory</h3>
+                <p>Rollouts · tool outputs · success / failure traces</p>
+              </div>
+              <div class="compact-center">
+                <div class="orbit">
+                  <span class="orbit-tag tag-top">Use Tools</span>
+                  <span class="orbit-tag tag-right">Refine</span>
+                  <span class="orbit-tag tag-bottom">Select</span>
+                  <span class="orbit-tag tag-left">Retrieve</span>
+                  <div class="core">
                     <span>Skill-3D</span>
-                    <strong>Co-Evolving<br />Skills</strong>
+                    <strong>Scene-Aware<br />Skills</strong>
                   </div>
                 </div>
               </div>
-
-              <div class="visual-right">
-                <div class="mini-panel">
-                  <div class="mini-label">Tool-Use Quality</div>
-                  <div class="metric-row">
-                    <span>ETU</span>
-                    <strong>78.7%</strong>
-                  </div>
-                  <div class="metric-bar">
-                    <span style="width: 78.7%;"></span>
-                  </div>
-                </div>
-
-                <div class="mini-panel">
-                  <div class="mini-label">Skill Retrieval</div>
-                  <div class="skill-pill static">#st_01 · Counting</div>
-                  <div class="skill-pill dynamic">#dy_06 · Depth-Distance</div>
-                  <div class="skill-pill dynamic">#dy_12 · Multi-view Dedup</div>
-                </div>
-
-                <div class="mini-panel answer-panel">
-                  <div class="mini-label">Evidence-Grounded Answer</div>
-                  <p>Tools are selected according to task-specific evidence requirements.</p>
-                </div>
+              <div class="compact-card c-library">
+                <span class="step">03</span>
+                <h3>Skill Library</h3>
+                <p>Workflows + failure lessons</p>
+              </div>
+              <div class="compact-card c-policy">
+                <span class="step">04</span>
+                <h3>Policy Training</h3>
+                <p>Agentic SFT + GRPO</p>
               </div>
             </div>
           </div>
@@ -122,145 +101,202 @@
       </div>
     </section>
 
-    <section class="stats container" aria-label="Key results">
-      <div class="stat-card">
-        <span class="stat-value">32% → 78%</span>
-        <span class="stat-label">Effective Tool Usage on VSI-Bench</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-value">+67%</span>
-        <span class="stat-label">Gemini-3-Flash gain on MMSI-Bench</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-value">+43%</span>
-        <span class="stat-label">Qwen3-VL-8B gain on VSI-Bench</span>
-      </div>
+    <section class="stats container-wide" aria-label="Key results">
+      <div class="stat-card"><span class="stat-value">32% → 78%</span><span class="stat-label">Effective Tool Usage on VSI-Bench</span></div>
+      <div class="stat-card"><span class="stat-value">+67%</span><span class="stat-label">Gemini-3-Flash gain on MMSI-Bench</span></div>
+      <div class="stat-card"><span class="stat-value">+43%</span><span class="stat-label">Qwen3-VL-8B gain on VSI-Bench</span></div>
     </section>
 
-    <section id="overview" class="section container">
+    <section id="overview" class="section container-wide overview-section">
       <div class="section-heading">
         <p class="eyebrow">Motivation</p>
         <h2>Tool availability is not enough.</h2>
       </div>
-      <div class="two-col">
-        <div>
-          <p>
-            Existing tool-augmented MLLM agents often apply uniform tool-use patterns across heterogeneous indoor scenes. This can lead to biased tool preferences, mismatched evidence, and marginal gains over non-agentic baselines.
-          </p>
-          <p>
-            Skill-3D addresses this by learning scene-aware skills that encode when to use detection, depth estimation, segmentation, 3D reconstruction, orientation estimation, or combinations of these tools.
-          </p>
+      <div class="motivation-layout">
+        <div class="motivation-left">
+          <figure class="radar-motivation-card">
+            <img src="assets/results_radar.svg" alt="Radar chart showing representative spatial reasoning improvements" />
+            <figcaption>Representative spatial reasoning dimensions where Skill-3D improves tool-grounded reasoning.</figcaption>
+          </figure>
+          <div class="motivation-text">
+            <p>Existing tool-augmented MLLM agents often apply uniform tool-use patterns across heterogeneous indoor scenes. This can lead to biased tool preferences, mismatched evidence, and marginal gains over non-agentic baselines.</p>
+            <p>Skill-3D addresses this by learning scene-aware skills that encode when to use detection, depth estimation, segmentation, 3D reconstruction, orientation estimation, or combinations of these tools.</p>
+          </div>
         </div>
-        <figure class="figure-card">
-          <img src="assets/teaser.svg" alt="Skill-3D motivation and overview" />
+        <figure class="figure-card motivation-figure-card">
+          <img src="assets/motivation.png" alt="Skill-3D motivation and overview" />
           <figcaption>Scene-aware skills route each query to task-relevant tool workflows.</figcaption>
         </figure>
       </div>
     </section>
 
     <section id="method" class="section tinted">
-      <div class="container">
+      <div class="container-wide method-container">
         <div class="section-heading">
           <p class="eyebrow">Method</p>
           <h2>Scene Memory, Skill Library, and skill-guided post-training.</h2>
         </div>
-        <figure class="wide-figure">
-          <img src="assets/method.svg" alt="Skill-3D method overview" />
+        <figure class="wide-figure method-main-figure">
+          <img class="method-img" src="assets/main.png" alt="Skill-3D method overview" />
+          <figcaption>Overview of Skill-3D: scene-aware skill extraction, skill-guided inference, and skill-guided agentic post-training.</figcaption>
         </figure>
         <div class="cards three">
-          <article class="card">
-            <h3>Scene-Aware Skill Extraction</h3>
-            <p>Successful rollouts are distilled into reusable workflows. Failed rollouts are attached as lessons and converted into fallback rules when they provide reliable corrections.</p>
-          </article>
-          <article class="card">
-            <h3>Skill-Guided Inference</h3>
-            <p>Given a query, Skill-3D retrieves candidate static and dynamic skills, selects a compact subset, and uses them to guide evidence acquisition and final reasoning.</p>
-          </article>
-          <article class="card">
-            <h3>Agentic Post-Training</h3>
-            <p>Skill-guided trajectories supervise compact MLLM agents through agentic SFT and GRPO, teaching them to select skills, call tools, and ground answers in evidence.</p>
-          </article>
+          <article class="card"><h3>Scene-Aware Skill Extraction</h3><p>Successful rollouts are distilled into reusable workflows. Failed rollouts are attached as lessons and converted into fallback rules when they provide reliable corrections.</p></article>
+          <article class="card"><h3>Skill-Guided Inference</h3><p>Given a query, Skill-3D retrieves candidate static and dynamic skills, selects a compact subset, and uses them to guide evidence acquisition and final reasoning.</p></article>
+          <article class="card"><h3>Skill-Guided Agentic Post-Training</h3><p>Skill-guided trajectories supervise compact MLLM agents through agentic SFT and GRPO, teaching them to select skills, call tools, and ground answers in evidence.</p></article>
         </div>
       </div>
     </section>
 
-    <section id="results" class="section container">
-      <div class="section-heading">
-        <p class="eyebrow">Results</p>
-        <h2>Consistent gains across closed- and open-source agents.</h2>
+    <section id="results" class="section results-section">
+      <div class="container-wide">
+        <div class="section-heading">
+          <p class="eyebrow">Results</p>
+          <h2>Consistent gains across closed- and open-source agents.</h2>
+        </div>
       </div>
-      <div class="two-col">
-        <figure class="figure-card">
-          <img src="assets/results_radar.svg" alt="Radar chart showing Skill-3D improvements" />
-          <figcaption>Skill-3D improves representative spatial reasoning dimensions.</figcaption>
-        </figure>
-        <div class="result-list">
-          <div class="result-item">
-            <h3>Closed-source agents</h3>
-            <p>Skill-3D outperforms non-agentic, direct tool-use, and Think3D baselines across GPT-4o, GPT-5.4, Gemini-2.5-Pro, and Gemini-3-Flash.</p>
+      <div class="full-table-shell">
+        <div class="table-card-header">
+          <div>
+            <h3>Comprehensive Evaluation</h3>
+            <p>VSI-Bench, BLINK, CV-3D, and MMSI-Bench</p>
           </div>
-          <div class="result-item">
-            <h3>Open-source agents</h3>
-            <p>Skill-guided post-training transfers to compact Qwen3-VL-4B/8B agents and improves skill selection, tool use, and evidence-grounded answering.</p>
+          <div class="table-tabs" aria-label="Result table selector">
+            <button class="table-tab active" type="button" data-table="closed">Closed-source</button>
+            <button class="table-tab" type="button" data-table="open">Open-source</button>
           </div>
         </div>
+        <div class="table-image-wrap full-screen-table">
+          <img id="result-table-img" src="assets/table_closed.svg" alt="Closed-source evaluation table" />
+        </div>
+        <p class="table-caption" id="result-table-caption">Closed-source evaluation across GPT-4o, GPT-5.4, Gemini-2.5-Pro, and Gemini-3-Flash.</p>
+      </div>
+      <div class="result-summary-cards container-wide">
+        <article class="result-summary-card"><h3>Closed-source agents</h3><p>Skill-3D consistently outperforms non-agentic, direct tool-use, and Think3D baselines across four closed-source MLLM agents. The gains are most pronounced on VSI-Bench, where different spatial categories require task-specific evidence such as object grounding, depth estimation, and multi-view verification.</p></article>
+        <article class="result-summary-card"><h3>Open-source agents</h3><p>Skill-guided post-training transfers to compact Qwen3-VL-4B/8B agents. The results show that scene-aware tool-use behavior can be internalized by smaller policies through agentic SFT and GRPO, improving skill selection, tool usage, and evidence-grounded answering.</p></article>
       </div>
     </section>
 
-    <section id="analysis" class="section tinted">
-      <div class="container">
+    <section id="analysis" class="section tinted analysis-section">
+      <div class="container-wide">
         <div class="section-heading">
           <p class="eyebrow">Analysis</p>
           <h2>Skill-3D improves tool-use quality, not just tool-call frequency.</h2>
         </div>
-        <div class="cards two">
-          <figure class="figure-card">
-            <img src="assets/etu.svg" alt="Effective tool usage bar charts" />
+        <div class="analysis-cards">
+          <article class="interactive-chart-card">
+            <h3>Effective Tool Usage</h3>
+            <p class="chart-subtitle">Hover over each bar to inspect the exact value.</p>
+            <div class="bar-legend">
+              <span><i class="m1"></i>GPT5.4</span>
+              <span><i class="m2"></i>Think3D</span>
+              <span><i class="m3"></i>Skill-3D</span>
+            </div>
+            <div class="etu-chart" aria-label="Effective Tool Usage chart">
+              <div class="chart-scale"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+              <div class="chart-grid">
+                <div class="dataset-group"><div class="bar m1" style="height:39.2%" data-tip="GPT5.4 · VSI-Bench: 39.2%"><b>39.2%</b></div><div class="bar m2" style="height:58.5%" data-tip="Think3D · VSI-Bench: 58.5%"><b>58.5%</b></div><div class="bar m3" style="height:78.7%" data-tip="Skill-3D · VSI-Bench: 78.7%"><b>78.7%</b></div><label>VSI</label></div>
+                <div class="dataset-group"><div class="bar m1" style="height:36.4%" data-tip="GPT5.4 · BLINK: 36.4%"><b>36.4%</b></div><div class="bar m2" style="height:54.0%" data-tip="Think3D · BLINK: 54.0%"><b>54.0%</b></div><div class="bar m3" style="height:79.2%" data-tip="Skill-3D · BLINK: 79.2%"><b>79.2%</b></div><label>BLINK</label></div>
+                <div class="dataset-group"><div class="bar m1" style="height:31.8%" data-tip="GPT5.4 · CV-3D: 31.8%"><b>31.8%</b></div><div class="bar m2" style="height:48.3%" data-tip="Think3D · CV-3D: 48.3%"><b>48.3%</b></div><div class="bar m3" style="height:87.5%" data-tip="Skill-3D · CV-3D: 87.5%"><b>87.5%</b></div><label>CV-3D</label></div>
+                <div class="dataset-group"><div class="bar m1" style="height:30.5%" data-tip="GPT5.4 · MMSI-Bench: 30.5%"><b>30.5%</b></div><div class="bar m2" style="height:45.6%" data-tip="Think3D · MMSI-Bench: 45.6%"><b>45.6%</b></div><div class="bar m3" style="height:80.3%" data-tip="Skill-3D · MMSI-Bench: 80.3%"><b>80.3%</b></div><label>MMSI</label></div>
+              </div>
+            </div>
             <figcaption>Effective Tool Usage improves across VSI-Bench, BLINK, CV-3D, and MMSI-Bench.</figcaption>
-          </figure>
-          <figure class="figure-card">
-            <img src="assets/tool_distribution.svg" alt="Tool distribution charts" />
+          </article>
+          <article class="interactive-chart-card">
+            <h3>Task-Aligned Tool Distribution</h3>
+            <p class="chart-subtitle">Bars show tool-call frequency by task group; hover for exact values.</p>
+            <div class="bar-legend">
+              <span><i class="m1"></i>GPT-5.4</span>
+              <span><i class="m2"></i>Think3D</span>
+              <span><i class="m3"></i>Skill-3D</span>
+            </div>
+            <div class="tool-panels">
+              <div class="small-chart"><h4>Depth / Distance / Size</h4><div class="mini-bars"><div class="mini-group"><div class="bar m1" style="height:18%" data-tip="GPT-5.4 · Pi3: 18%"><b>18%</b></div><div class="bar m2" style="height:61%" data-tip="Think3D · Pi3: 61%"><b>61%</b></div><div class="bar m3" style="height:8%" data-tip="Skill-3D · Pi3: 8%"><b>8%</b></div><label>Pi3</label></div><div class="mini-group"><div class="bar m1" style="height:10%" data-tip="GPT-5.4 · Depth: 10%"><b>10%</b></div><div class="bar m2" style="height:7%" data-tip="Think3D · Depth: 7%"><b>7%</b></div><div class="bar m3" style="height:67%" data-tip="Skill-3D · Depth: 67%"><b>67%</b></div><label>Depth</label></div></div></div>
+              <div class="small-chart"><h4>Spatial Relation / Direction</h4><div class="mini-bars"><div class="mini-group"><div class="bar m1" style="height:15%" data-tip="GPT-5.4 · Pi3: 15%"><b>15%</b></div><div class="bar m2" style="height:57%" data-tip="Think3D · Pi3: 57%"><b>57%</b></div><div class="bar m3" style="height:26%" data-tip="Skill-3D · Pi3: 26%"><b>26%</b></div><label>Pi3</label></div><div class="mini-group"><div class="bar m1" style="height:7%" data-tip="GPT-5.4 · Orientation: 7%"><b>7%</b></div><div class="bar m2" style="height:3%" data-tip="Think3D · Orientation: 3%"><b>3%</b></div><div class="bar m3" style="height:45%" data-tip="Skill-3D · Orientation: 45%"><b>45%</b></div><label>Orient</label></div></div></div>
+            </div>
             <figcaption>Tool usage becomes more task-aligned for depth/distance/size and direction reasoning tasks.</figcaption>
-          </figure>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="cases" class="section container">
-      <div class="section-heading">
+    <section id="cases" class="section container-wide dialogue-section">
+      <div class="section-heading centered-heading">
         <p class="eyebrow">Qualitative Cases</p>
-        <h2>Scene-aware skills resolve tool-use failure modes.</h2>
+        <h2>Dialogue examples</h2>
+        <p class="section-desc center">Slide through six representative examples showing the scene, question, retrieved skills, tool workflow, and Skill-3D answer.</p>
       </div>
-      <div class="cards two">
-        <article class="card">
-          <h3>Metric distance estimation</h3>
-          <p>Skill-3D retrieves a depth-distance skill and combines 3D reconstruction, object detection, and depth estimation to ground closest-point distance.</p>
-        </article>
-        <article class="card">
-          <h3>Multi-view object counting</h3>
-          <p>Skill-3D retrieves a detection-counting skill and suppresses repeated object appearances across views using layout consistency and detection evidence.</p>
-        </article>
+      <div class="dialogue-carousel">
+        <button class="carousel-btn prev" type="button" aria-label="Previous case">‹</button>
+        <div class="dialogue-track" id="dialogueTrack">
+          <article class="dialogue-card"><div class="dialogue-scene"><img src="assets/case_1.png" alt="Distance case" /></div><div class="chat-area"><div class="bubble user">Measuring from the closest point of each object, what is the distance between the table and the bathtub?</div><div class="skill-row"><span class="skill-chip dynamic">#dy_06 · depth-distance</span><span class="skill-chip static">#st_01 · object grounding</span></div><div class="tool-row"><span>Pi3</span><i>→</i><span>Obj. Det.</span><i>→</i><span>Depth Est.</span></div><div class="bubble assistant">Skill-3D retrieves a depth-distance skill and combines reconstruction, object localization, and dense depth cues. The final answer is <strong>0.9m</strong>.</div></div></article>
+          <article class="dialogue-card"><div class="dialogue-scene"><img src="assets/case_2.png" alt="Counting case" /></div><div class="chat-area"><div class="bubble user">How many chair(s) are there in this room?</div><div class="skill-row"><span class="skill-chip dynamic">#dy_12 · detection-counting</span><span class="skill-chip static">#st_04 · multi-view dedup</span></div><div class="tool-row"><span>Pi3</span><i>→</i><span>Obj. Det.</span></div><div class="bubble assistant">Skill-3D uses layout consistency and object detection to suppress duplicated chair appearances across views. The final count is <strong>4</strong>.</div></div></article>
+          <article class="dialogue-card"><div class="dialogue-scene"><img src="assets/case_3.png" alt="Direction case" /></div><div class="chat-area"><div class="bubble user">What is the relative direction of the chair with respect to the table?</div><div class="skill-row"><span class="skill-chip dynamic">#dy_09 · orientation-relation</span><span class="skill-chip static">#st_03 · spatial grounding</span></div><div class="tool-row"><span>Obj. Det.</span><i>→</i><span>OrientAnything</span><i>→</i><span>Pi3</span></div><div class="bubble assistant">Skill-3D retrieves an orientation-relation skill and grounds the answer using object positions and orientation evidence.</div></div></article>
+          <article class="dialogue-card"><div class="dialogue-scene"><img src="assets/case_4.png" alt="Room size case" /></div><div class="chat-area"><div class="bubble user">Estimate the room size using the sampled views.</div><div class="skill-row"><span class="skill-chip dynamic">#dy_08 · room-size</span><span class="skill-chip static">#st_02 · geometry check</span></div><div class="tool-row"><span>Pi3</span><i>→</i><span>Depth Est.</span><i>→</i><span>Layout Check</span></div><div class="bubble assistant">The retrieved skill directs the agent to combine room-level reconstruction with metric depth cues before producing the final estimate.</div></div></article>
+          <article class="dialogue-card"><div class="dialogue-scene"><img src="assets/case_5.png" alt="Appearance order case" /></div><div class="chat-area"><div class="bubble user">Which object appears first along the camera trajectory?</div><div class="skill-row"><span class="skill-chip dynamic">#dy_14 · appearance-order</span><span class="skill-chip static">#st_06 · multi-view temporal cue</span></div><div class="tool-row"><span>View Sampling</span><i>→</i><span>Obj. Det.</span><i>→</i><span>Order Check</span></div><div class="bubble assistant">Skill-3D uses multi-view ordering evidence instead of a single-frame guess, reducing ambiguity in appearance-order reasoning.</div></div></article>
+          <article class="dialogue-card"><div class="dialogue-scene"><img src="assets/case_6.png" alt="Route planning case" /></div><div class="chat-area"><div class="bubble user">Which route should I take to move from the door to the sofa without crossing obstacles?</div><div class="skill-row"><span class="skill-chip dynamic">#dy_15 · route-planning</span><span class="skill-chip static">#st_05 · layout grounding</span></div><div class="tool-row"><span>Pi3</span><i>→</i><span>Seg.</span><i>→</i><span>Layout Check</span></div><div class="bubble assistant">Skill-3D combines room-level geometry and obstacle evidence to produce a route that avoids blocked regions and remains consistent across views.</div></div></article>
+        </div>
+        <button class="carousel-btn next" type="button" aria-label="Next case">›</button>
+      </div>
+      <div class="carousel-dots" aria-label="Dialogue carousel pagination">
+        <button class="dot-indicator active" type="button" data-slide="0"></button><button class="dot-indicator" type="button" data-slide="1"></button><button class="dot-indicator" type="button" data-slide="2"></button><button class="dot-indicator" type="button" data-slide="3"></button><button class="dot-indicator" type="button" data-slide="4"></button><button class="dot-indicator" type="button" data-slide="5"></button>
       </div>
     </section>
 
-    <section id="bibtex" class="section container">
-      <div class="section-heading">
-        <p class="eyebrow">Citation</p>
-        <h2>BibTeX</h2>
-      </div>
+    <section id="bibtex" class="section container-wide">
+      <div class="section-heading"><p class="eyebrow">Citation</p><h2>BibTeX</h2></div>
       <pre class="bibtex"><code>@inproceedings{skill3d2026,
   title     = {Skill-3D: Evolving Scene-Aware Skills for Agentic 3D Spatial Reasoning},
-  author    = {Anonymous Authors},
+  author    = {Haoyuan Li and Zhengdong Hu and Jun Wang and Hehe Fan and Yi Yang},
   booktitle = {EMNLP},
   year      = {2026}
 }</code></pre>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p>Skill-3D Project Page. Replace placeholder links, figures, and citation with the camera-ready version.</p>
-    </div>
-  </footer>
+  <footer class="footer"><div class="container-wide"><p>Skill-3D Project Page.</p></div></footer>
+
+  <script>
+    const RESULT_TABLES = {
+      closed: { src: "assets/table_closed.svg", alt: "Closed-source evaluation table", caption: "Closed-source evaluation across GPT-4o, GPT-5.4, Gemini-2.5-Pro, and Gemini-3-Flash." },
+      open: { src: "assets/table_open.svg", alt: "Open-source evaluation table", caption: "Open-source evaluation on Qwen3-VL-4B and Qwen3-VL-8B." }
+    };
+    const tableTabs = document.querySelectorAll(".table-tab");
+    const resultTableImg = document.getElementById("result-table-img");
+    const resultTableCaption = document.getElementById("result-table-caption");
+    tableTabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const data = RESULT_TABLES[tab.dataset.table];
+        tableTabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        resultTableImg.src = data.src;
+        resultTableImg.alt = data.alt;
+        resultTableCaption.textContent = data.caption;
+      });
+    });
+
+    const track = document.getElementById("dialogueTrack");
+    const prevBtn = document.querySelector(".carousel-btn.prev");
+    const nextBtn = document.querySelector(".carousel-btn.next");
+    const dots = document.querySelectorAll(".dot-indicator");
+    function getCardWidth() {
+      const card = track.querySelector(".dialogue-card");
+      const styles = window.getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap || styles.gap || 0);
+      return card.getBoundingClientRect().width + gap;
+    }
+    function updateDots() {
+      const cardWidth = getCardWidth();
+      const index = Math.max(0, Math.min(dots.length - 1, Math.round(track.scrollLeft / cardWidth)));
+      dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+    }
+    nextBtn.addEventListener("click", () => track.scrollBy({ left: getCardWidth(), behavior: "smooth" }));
+    prevBtn.addEventListener("click", () => track.scrollBy({ left: -getCardWidth(), behavior: "smooth" }));
+    dots.forEach(dot => dot.addEventListener("click", () => track.scrollTo({ left: getCardWidth() * Number(dot.dataset.slide), behavior: "smooth" })));
+    track.addEventListener("scroll", () => window.requestAnimationFrame(updateDots));
+    window.addEventListener("resize", updateDots);
+    updateDots();
+  </script>
 </body>
 </html>
