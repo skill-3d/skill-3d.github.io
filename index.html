@@ -11,6 +11,13 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="animated-bg" aria-hidden="true">
+    <span class="bg-orb orb-a"></span>
+    <span class="bg-orb orb-b"></span>
+    <span class="bg-orb orb-c"></span>
+    <span class="bg-orb orb-d"></span>
+    <span class="bg-grid"></span>
+  </div>
   <header class="site-header">
     <nav class="nav container-wide">
       <a class="brand" href="#top">Skill-3D</a>
@@ -102,9 +109,9 @@
     </section>
 
     <section class="stats container-wide" aria-label="Key results">
-      <div class="stat-card"><span class="stat-value">32% → 78%</span><span class="stat-label">Effective Tool Usage on VSI-Bench</span></div>
-      <div class="stat-card"><span class="stat-value">+67%</span><span class="stat-label">Gemini-3-Flash gain on MMSI-Bench</span></div>
-      <div class="stat-card"><span class="stat-value">+43%</span><span class="stat-label">Qwen3-VL-8B gain on VSI-Bench</span></div>
+      <div class="stat-card info-hover" data-tip="ETU"><span class="stat-value">32% → 78%</span><span class="stat-label">Effective Tool Usage on VSI-Bench</span></div>
+      <div class="stat-card info-hover" data-tip="Closed-source gain"><span class="stat-value">+67%</span><span class="stat-label">Gemini-3-Flash gain on MMSI-Bench</span></div>
+      <div class="stat-card info-hover" data-tip="Open-source transfer"><span class="stat-value">+43%</span><span class="stat-label">Qwen3-VL-8B gain on VSI-Bench</span></div>
     </section>
 
     <section id="overview" class="section container-wide overview-section">
@@ -114,19 +121,34 @@
       </div>
       <div class="motivation-layout">
         <div class="motivation-left">
-          <figure class="radar-motivation-card">
-            <img src="assets/results_radar.svg" alt="Radar chart showing representative spatial reasoning improvements" />
-            <figcaption>Representative spatial reasoning dimensions where Skill-3D improves tool-grounded reasoning.</figcaption>
+          <figure class="radar-motivation-card static-radar-card info-hover" data-tip="Radar comparison">
+            <div class="radar-legend" aria-label="Radar chart legend">
+              <span><i class="r-think"></i>Think3D</span>
+              <span><i class="r-skill"></i>Skill-3D</span>
+            </div>
+            <img class="static-radar-img" src="assets/results_radar.svg" alt="Radar chart comparing GPT-5.4, Think3D, and Skill-3D" />
+            <figcaption>Skill-3D improves representative spatial reasoning dimensions while preserving tool-grounded evidence.</figcaption>
           </figure>
-          <div class="motivation-text">
-            <p>Existing tool-augmented MLLM agents often apply uniform tool-use patterns across heterogeneous indoor scenes. This can lead to biased tool preferences, mismatched evidence, and marginal gains over non-agentic baselines.</p>
-            <p>Skill-3D addresses this by learning scene-aware skills that encode when to use detection, depth estimation, segmentation, 3D reconstruction, orientation estimation, or combinations of these tools.</p>
-          </div>
         </div>
         <figure class="figure-card motivation-figure-card">
           <img src="assets/motivation.png" alt="Skill-3D motivation and overview" />
           <figcaption>Scene-aware skills route each query to task-relevant tool workflows.</figcaption>
         </figure>
+      </div>
+      <div class="motivation-text-cards full-width">
+        <article class="motivation-text-card info-hover" data-tip="Uniform workflow">
+          <h3>Uniform Tool Use</h3>
+          <p>
+            Existing agents often apply fixed tool workflows across different spatial tasks, causing mismatched evidence and limited gains.
+          </p>
+        </article>
+      
+        <article class="motivation-text-card info-hover" data-tip="Scene-aware skill">
+          <h3>Scene-Aware Skills</h3>
+          <p>
+            Skill-3D retrieves task-specific skills to select the right tools and ground answers in relevant 3D evidence.
+          </p>
+        </article>
       </div>
     </section>
 
@@ -141,9 +163,9 @@
           <figcaption>Overview of Skill-3D: scene-aware skill extraction, skill-guided inference, and skill-guided agentic post-training.</figcaption>
         </figure>
         <div class="cards three">
-          <article class="card"><h3>Scene-Aware Skill Extraction</h3><p>Successful rollouts are distilled into reusable workflows. Failed rollouts are attached as lessons and converted into fallback rules when they provide reliable corrections.</p></article>
-          <article class="card"><h3>Skill-Guided Inference</h3><p>Given a query, Skill-3D retrieves candidate static and dynamic skills, selects a compact subset, and uses them to guide evidence acquisition and final reasoning.</p></article>
-          <article class="card"><h3>Skill-Guided Agentic Post-Training</h3><p>Skill-guided trajectories supervise compact MLLM agents through agentic SFT and GRPO, teaching them to select skills, call tools, and ground answers in evidence.</p></article>
+          <article class="card info-hover" data-tip="Skill extraction"><h3>Scene-Aware Skill Extraction</h3><p>Successful rollouts are distilled into reusable workflows. Failed rollouts are attached as lessons and converted into fallback rules when they provide reliable corrections.</p></article>
+          <article class="card info-hover" data-tip="Skill-guided inference"><h3>Skill-Guided Inference</h3><p>Given a query, Skill-3D retrieves candidate static and dynamic skills, selects a compact subset, and uses them to guide evidence acquisition and final reasoning.</p></article>
+          <article class="card info-hover" data-tip="Agentic training"><h3>Skill-Guided Agentic Post-Training</h3><p>Skill-guided trajectories supervise compact MLLM agents through agentic SFT and GRPO, teaching them to select skills, call tools, and ground answers in evidence.</p></article>
         </div>
       </div>
     </section>
@@ -172,8 +194,8 @@
         <p class="table-caption" id="result-table-caption">Closed-source evaluation across GPT-4o, GPT-5.4, Gemini-2.5-Pro, and Gemini-3-Flash.</p>
       </div>
       <div class="result-summary-cards container-wide">
-        <article class="result-summary-card"><h3>Closed-source agents</h3><p>Skill-3D consistently outperforms non-agentic, direct tool-use, and Think3D baselines across four closed-source MLLM agents. The gains are most pronounced on VSI-Bench, where different spatial categories require task-specific evidence such as object grounding, depth estimation, and multi-view verification.</p></article>
-        <article class="result-summary-card"><h3>Open-source agents</h3><p>Skill-guided post-training transfers to compact Qwen3-VL-4B/8B agents. The results show that scene-aware tool-use behavior can be internalized by smaller policies through agentic SFT and GRPO, improving skill selection, tool usage, and evidence-grounded answering.</p></article>
+        <article class="result-summary-card info-hover" data-tip="Closed-source result"><h3>Closed-source agents</h3><p>Skill-3D consistently outperforms non-agentic, direct tool-use, and Think3D baselines across four closed-source MLLM agents. The gains are most pronounced on VSI-Bench, where different spatial categories require task-specific evidence such as object grounding, depth estimation, and multi-view verification.</p></article>
+        <article class="result-summary-card info-hover" data-tip="Open-source result"><h3>Open-source agents</h3><p>Skill-guided post-training transfers to compact Qwen3-VL-4B/8B agents. The results show that scene-aware tool-use behavior can be internalized by smaller policies through agentic SFT and GRPO, improving skill selection, tool usage, and evidence-grounded answering.</p></article>
       </div>
     </section>
 
@@ -184,26 +206,26 @@
           <h2>Skill-3D improves tool-use quality, not just tool-call frequency.</h2>
         </div>
         <div class="analysis-cards">
-          <article class="interactive-chart-card">
+          <article class="interactive-chart-card info-hover" data-tip="Effective tool usage">
             <h3>Effective Tool Usage</h3>
             <p class="chart-subtitle">Hover over each bar to inspect the exact value.</p>
             <div class="bar-legend">
-              <span><i class="m1"></i>GPT5.4</span>
+              <span><i class="m1"></i>GPT-5.4</span>
               <span><i class="m2"></i>Think3D</span>
               <span><i class="m3"></i>Skill-3D</span>
             </div>
             <div class="etu-chart" aria-label="Effective Tool Usage chart">
               <div class="chart-scale"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
               <div class="chart-grid">
-                <div class="dataset-group"><div class="bar m1" style="height:39.2%" data-tip="GPT5.4 · VSI-Bench: 39.2%"><b>39.2%</b></div><div class="bar m2" style="height:58.5%" data-tip="Think3D · VSI-Bench: 58.5%"><b>58.5%</b></div><div class="bar m3" style="height:78.7%" data-tip="Skill-3D · VSI-Bench: 78.7%"><b>78.7%</b></div><label>VSI</label></div>
-                <div class="dataset-group"><div class="bar m1" style="height:36.4%" data-tip="GPT5.4 · BLINK: 36.4%"><b>36.4%</b></div><div class="bar m2" style="height:54.0%" data-tip="Think3D · BLINK: 54.0%"><b>54.0%</b></div><div class="bar m3" style="height:79.2%" data-tip="Skill-3D · BLINK: 79.2%"><b>79.2%</b></div><label>BLINK</label></div>
-                <div class="dataset-group"><div class="bar m1" style="height:31.8%" data-tip="GPT5.4 · CV-3D: 31.8%"><b>31.8%</b></div><div class="bar m2" style="height:48.3%" data-tip="Think3D · CV-3D: 48.3%"><b>48.3%</b></div><div class="bar m3" style="height:87.5%" data-tip="Skill-3D · CV-3D: 87.5%"><b>87.5%</b></div><label>CV-3D</label></div>
-                <div class="dataset-group"><div class="bar m1" style="height:30.5%" data-tip="GPT5.4 · MMSI-Bench: 30.5%"><b>30.5%</b></div><div class="bar m2" style="height:45.6%" data-tip="Think3D · MMSI-Bench: 45.6%"><b>45.6%</b></div><div class="bar m3" style="height:80.3%" data-tip="Skill-3D · MMSI-Bench: 80.3%"><b>80.3%</b></div><label>MMSI</label></div>
+                <div class="dataset-group"><div class="bar m1" style="height:39.2%" data-tip="GPT-5.4 · VSI-Bench: 39.2%"><b>39.2%</b></div><div class="bar m2" style="height:58.5%" data-tip="Think3D · VSI-Bench: 58.5%"><b>58.5%</b></div><div class="bar m3" style="height:78.7%" data-tip="Skill-3D · VSI-Bench: 78.7%"><b>78.7%</b></div><label>VSI</label></div>
+                <div class="dataset-group"><div class="bar m1" style="height:36.4%" data-tip="GPT-5.4 · BLINK: 36.4%"><b>36.4%</b></div><div class="bar m2" style="height:54.0%" data-tip="Think3D · BLINK: 54.0%"><b>54.0%</b></div><div class="bar m3" style="height:79.2%" data-tip="Skill-3D · BLINK: 79.2%"><b>79.2%</b></div><label>BLINK</label></div>
+                <div class="dataset-group"><div class="bar m1" style="height:31.8%" data-tip="GPT-5.4 · CV-3D: 31.8%"><b>31.8%</b></div><div class="bar m2" style="height:48.3%" data-tip="Think3D · CV-3D: 48.3%"><b>48.3%</b></div><div class="bar m3" style="height:87.5%" data-tip="Skill-3D · CV-3D: 87.5%"><b>87.5%</b></div><label>CV-3D</label></div>
+                <div class="dataset-group"><div class="bar m1" style="height:30.5%" data-tip="GPT-5.4 · MMSI-Bench: 30.5%"><b>30.5%</b></div><div class="bar m2" style="height:45.6%" data-tip="Think3D · MMSI-Bench: 45.6%"><b>45.6%</b></div><div class="bar m3" style="height:80.3%" data-tip="Skill-3D · MMSI-Bench: 80.3%"><b>80.3%</b></div><label>MMSI</label></div>
               </div>
             </div>
             <figcaption>Effective Tool Usage improves across VSI-Bench, BLINK, CV-3D, and MMSI-Bench.</figcaption>
           </article>
-          <article class="interactive-chart-card">
+          <article class="interactive-chart-card info-hover" data-tip="Task-aligned tools">
             <h3>Task-Aligned Tool Distribution</h3>
             <p class="chart-subtitle">Bars show tool-call frequency by task group; hover for exact values.</p>
             <div class="bar-legend">
@@ -230,12 +252,12 @@
       <div class="dialogue-carousel">
         <button class="carousel-btn prev" type="button" aria-label="Previous case">‹</button>
         <div class="dialogue-track" id="dialogueTrack">
-          <article class="dialogue-card"><div class="dialogue-scene"><img src="assets/case_1.png" alt="Distance case" /></div><div class="chat-area"><div class="bubble user">Measuring from the closest point of each object, what is the distance between the table and the bathtub?</div><div class="skill-row"><span class="skill-chip dynamic">#dy_06 · depth-distance</span><span class="skill-chip static">#st_01 · object grounding</span></div><div class="tool-row"><span>Pi3</span><i>→</i><span>Obj. Det.</span><i>→</i><span>Depth Est.</span></div><div class="bubble assistant">Skill-3D retrieves a depth-distance skill and combines reconstruction, object localization, and dense depth cues. The final answer is <strong>0.9m</strong>.</div></div></article>
-          <article class="dialogue-card"><div class="dialogue-scene"><img src="assets/case_2.png" alt="Counting case" /></div><div class="chat-area"><div class="bubble user">How many chair(s) are there in this room?</div><div class="skill-row"><span class="skill-chip dynamic">#dy_12 · detection-counting</span><span class="skill-chip static">#st_04 · multi-view dedup</span></div><div class="tool-row"><span>Pi3</span><i>→</i><span>Obj. Det.</span></div><div class="bubble assistant">Skill-3D uses layout consistency and object detection to suppress duplicated chair appearances across views. The final count is <strong>4</strong>.</div></div></article>
-          <article class="dialogue-card"><div class="dialogue-scene"><img src="assets/case_3.png" alt="Direction case" /></div><div class="chat-area"><div class="bubble user">What is the relative direction of the chair with respect to the table?</div><div class="skill-row"><span class="skill-chip dynamic">#dy_09 · orientation-relation</span><span class="skill-chip static">#st_03 · spatial grounding</span></div><div class="tool-row"><span>Obj. Det.</span><i>→</i><span>OrientAnything</span><i>→</i><span>Pi3</span></div><div class="bubble assistant">Skill-3D retrieves an orientation-relation skill and grounds the answer using object positions and orientation evidence.</div></div></article>
-          <article class="dialogue-card"><div class="dialogue-scene"><img src="assets/case_4.png" alt="Room size case" /></div><div class="chat-area"><div class="bubble user">Estimate the room size using the sampled views.</div><div class="skill-row"><span class="skill-chip dynamic">#dy_08 · room-size</span><span class="skill-chip static">#st_02 · geometry check</span></div><div class="tool-row"><span>Pi3</span><i>→</i><span>Depth Est.</span><i>→</i><span>Layout Check</span></div><div class="bubble assistant">The retrieved skill directs the agent to combine room-level reconstruction with metric depth cues before producing the final estimate.</div></div></article>
-          <article class="dialogue-card"><div class="dialogue-scene"><img src="assets/case_5.png" alt="Appearance order case" /></div><div class="chat-area"><div class="bubble user">Which object appears first along the camera trajectory?</div><div class="skill-row"><span class="skill-chip dynamic">#dy_14 · appearance-order</span><span class="skill-chip static">#st_06 · multi-view temporal cue</span></div><div class="tool-row"><span>View Sampling</span><i>→</i><span>Obj. Det.</span><i>→</i><span>Order Check</span></div><div class="bubble assistant">Skill-3D uses multi-view ordering evidence instead of a single-frame guess, reducing ambiguity in appearance-order reasoning.</div></div></article>
-          <article class="dialogue-card"><div class="dialogue-scene"><img src="assets/case_6.png" alt="Route planning case" /></div><div class="chat-area"><div class="bubble user">Which route should I take to move from the door to the sofa without crossing obstacles?</div><div class="skill-row"><span class="skill-chip dynamic">#dy_15 · route-planning</span><span class="skill-chip static">#st_05 · layout grounding</span></div><div class="tool-row"><span>Pi3</span><i>→</i><span>Seg.</span><i>→</i><span>Layout Check</span></div><div class="bubble assistant">Skill-3D combines room-level geometry and obstacle evidence to produce a route that avoids blocked regions and remains consistent across views.</div></div></article>
+          <article class="dialogue-card info-hover" data-tip="Dialogue case"><div class="dialogue-scene"><img src="assets/case_1.png" alt="Distance case" /></div><div class="chat-area"><div class="bubble user" data-tip="Question">Measuring from the closest point of each object, what is the distance between the table and the bathtub?</div><div class="skill-row" data-tip="Retrieved skills"><span class="skill-chip dynamic">#dy_06 · depth-distance</span><span class="skill-chip static">#st_01 · object grounding</span></div><div class="tool-row" data-tip="Tool workflow"><span>Pi3</span><i>→</i><span>Obj. Det.</span><i>→</i><span>Depth Est.</span></div><div class="bubble assistant" data-tip="Skill-3D answer">Skill-3D retrieves a depth-distance skill and combines reconstruction, object localization, and dense depth cues. The final answer is <strong>0.9m</strong>.</div></div></article>
+          <article class="dialogue-card info-hover" data-tip="Dialogue case"><div class="dialogue-scene"><img src="assets/case_2.png" alt="Counting case" /></div><div class="chat-area"><div class="bubble user" data-tip="Question">How many chair(s) are there in this room?</div><div class="skill-row" data-tip="Retrieved skills"><span class="skill-chip dynamic">#dy_12 · detection-counting</span><span class="skill-chip static">#st_04 · multi-view dedup</span></div><div class="tool-row" data-tip="Tool workflow"><span>Pi3</span><i>→</i><span>Obj. Det.</span></div><div class="bubble assistant" data-tip="Skill-3D answer">Skill-3D uses layout consistency and object detection to suppress duplicated chair appearances across views. The final count is <strong>4</strong>.</div></div></article>
+          <article class="dialogue-card info-hover" data-tip="Dialogue case"><div class="dialogue-scene"><img src="assets/case_3.png" alt="Direction case" /></div><div class="chat-area"><div class="bubble user" data-tip="Question">What is the relative direction of the chair with respect to the table?</div><div class="skill-row" data-tip="Retrieved skills"><span class="skill-chip dynamic">#dy_09 · orientation-relation</span><span class="skill-chip static">#st_03 · spatial grounding</span></div><div class="tool-row" data-tip="Tool workflow"><span>Obj. Det.</span><i>→</i><span>OrientAnything</span><i>→</i><span>Pi3</span></div><div class="bubble assistant" data-tip="Skill-3D answer">Skill-3D retrieves an orientation-relation skill and grounds the answer using object positions and orientation evidence.</div></div></article>
+          <article class="dialogue-card info-hover" data-tip="Dialogue case"><div class="dialogue-scene"><img src="assets/case_4.png" alt="Room size case" /></div><div class="chat-area"><div class="bubble user" data-tip="Question">Estimate the room size using the sampled views.</div><div class="skill-row" data-tip="Retrieved skills"><span class="skill-chip dynamic">#dy_08 · room-size</span><span class="skill-chip static">#st_02 · geometry check</span></div><div class="tool-row" data-tip="Tool workflow"><span>Pi3</span><i>→</i><span>Depth Est.</span><i>→</i><span>Layout Check</span></div><div class="bubble assistant" data-tip="Skill-3D answer">The retrieved skill directs the agent to combine room-level reconstruction with metric depth cues before producing the final estimate.</div></div></article>
+          <article class="dialogue-card info-hover" data-tip="Dialogue case"><div class="dialogue-scene"><img src="assets/case_5.png" alt="Appearance order case" /></div><div class="chat-area"><div class="bubble user" data-tip="Question">Which object appears first along the camera trajectory?</div><div class="skill-row" data-tip="Retrieved skills"><span class="skill-chip dynamic">#dy_14 · appearance-order</span><span class="skill-chip static">#st_06 · multi-view temporal cue</span></div><div class="tool-row" data-tip="Tool workflow"><span>View Sampling</span><i>→</i><span>Obj. Det.</span><i>→</i><span>Order Check</span></div><div class="bubble assistant" data-tip="Skill-3D answer">Skill-3D uses multi-view ordering evidence instead of a single-frame guess, reducing ambiguity in appearance-order reasoning.</div></div></article>
+          <article class="dialogue-card info-hover" data-tip="Dialogue case"><div class="dialogue-scene"><img src="assets/case_6.png" alt="Route planning case" /></div><div class="chat-area"><div class="bubble user" data-tip="Question">Which route should I take to move from the door to the sofa without crossing obstacles?</div><div class="skill-row" data-tip="Retrieved skills"><span class="skill-chip dynamic">#dy_15 · route-planning</span><span class="skill-chip static">#st_05 · layout grounding</span></div><div class="tool-row" data-tip="Tool workflow"><span>Pi3</span><i>→</i><span>Seg.</span><i>→</i><span>Layout Check</span></div><div class="bubble assistant" data-tip="Skill-3D answer">Skill-3D combines room-level geometry and obstacle evidence to produce a route that avoids blocked regions and remains consistent across views.</div></div></article>
         </div>
         <button class="carousel-btn next" type="button" aria-label="Next case">›</button>
       </div>
