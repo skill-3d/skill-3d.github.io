@@ -415,8 +415,8 @@
         question: "What will be the first-time appearance order of the following categories in the video: basket, door, pillow, laptop?\nSelect from the following choices.\n(A) A. basket, pillow, door, laptop\n(B) B. pillow, door, laptop, basket\n(C) C. basket, door, pillow, laptop\n(D) D. door, basket, pillow, laptop\n",
         skills: [["dynamic", "#dy_14 · appearance_order"], ["static", "#st_06 · temporal_cue"]],
         tools: [
-          { name: "Object Detection", previews: ["assets/case_5_det.png"] },
-          { name: "Segmentation", previews: ["assets/case_5_order.png"] }
+          { name: "Object Detection", previews: ["assets/case5_detect1.jpg", "assets/case5_detect2.jpg", "assets/case5_detect3.jpg"] },
+          { name: "Segmentation", previews: ["assets/case5_seg1.png", "assets/case5_seg2.png", "assets/case5_seg3.png","assets/case5_seg4.png"] }
         ],
         answer: " The segmented pillow is visible immediately in the initial bedroom views, making it the first observed target. As the camera continues, detection and segmentation identify the door before the workspace comes into view. The laptop appears later on the desk after the camera enters the work area, while the basket is only observed in the final views. Tracking the first appearance of each segmented object across the trajectory yields the temporal order: <strong>D pillow → door → laptop → basket.</strong>"
       },
