@@ -330,7 +330,7 @@
       <pre class="bibtex"><code>@inproceedings{skill3d2026,
   title     = {Skill-3D: Evolving Scene-Aware Skills for Agentic 3D Spatial Reasoning},
   author    = {Haoyuan Li and Zhengdong Hu and Jun Wang and Hehe Fan and Yi Yang},
-  booktitle = {EMNLP},
+  booktitle = {arXiv},
   year      = {2026}
 }</code></pre>
     </section>
@@ -366,7 +366,7 @@
         question: "How many monitor(s) are in this room?",
         skills: [["dynamic", "#dy_06 · object_counting"], ["static", "#st_01 · object_counting"]],
         tools: [
-          { name: "Reconstruction", previews: ["assets/case_1_pi3.png"] },
+          { name: "Reconstruction", previews: ["assets/case1_pi3.png"] },
           { name: "Object Detection", previews: ["assets/case1_detected_1.jpg", "assets/case1_detected_2.jpg", "assets/case1_detected_3.jpg", "assets/case1_detected_4.jpg"] }
         ],
         answer: "Object detection localizes monitor candidates across views, while segmentation refines object boundaries and separates adjacent monitors. After cross-view de-duplication, the final monitor count is <strong>4</strong>."
@@ -418,7 +418,7 @@
           { name: "Object Detection", previews: ["assets/case5_detect1.jpg", "assets/case5_detect2.jpg", "assets/case5_detect3.jpg"] },
           { name: "Segmentation", previews: ["assets/case5_seg1.png", "assets/case5_seg2.png", "assets/case5_seg3.png","assets/case5_seg4.png"] }
         ],
-        answer: " The segmented pillow is visible immediately in the initial bedroom views, making it the first observed target. As the camera continues, detection and segmentation identify the door before the workspace comes into view. The laptop appears later on the desk after the camera enters the work area, while the basket is only observed in the final views. Tracking the first appearance of each segmented object across the trajectory yields the temporal order: <strong>D pillow → door → laptop → basket.</strong>"
+        answer: "Object detection localizes pillow, door, laptop, and basket candidates throughout the video, while segmentation refines their boundaries and ensures consistent object identity across views. The temporal-cue skill then tracks the first frame in which each segmented object appears. The pillow is detected in the initial bedroom scene, followed by the door as the camera moves through the room. The laptop becomes visible later on the desk, and the basket only appears in the final views. Therefore, the first-time appearance order is <strong>B. pillow → door → laptop → basket</strong>."
       },
       {
         label: "Case 6 · Route Planning",
@@ -428,7 +428,7 @@
         skills: [["dynamic", "#dy_15 · route_planning"], ["static", "#st_05 · layout_grounding"]],
         tools: [
           { name: "Reconstruction", previews: ["assets/case6_pi3.png"] },
-          { name: "Object Detection", previews: ["assets/case6_seg.png"] }
+          { name: "Object Detection", previews: ["assets/case6_detected_1.jpg", "assets/case6_detected2.jpg", "assets/case6_detected3.jpg", "assets/case6_detected4.jpg"] }
         ],
         answer: "Object detection localizes the blue chair, trash bins, fan, and back workbench across the sampled frames, while reconstruction connects these observations into a consistent spatial layout. Frames 4--6 place the fan beside the back workbench and the trash bins along the left side of the same back wall. In the reconstructed layout, starting from the blue-chair area and moving forward past the tables on the right leads into the aisle toward the back wall. Once approaching the back area, the detected trash bins lie to the left of the forward direction, so the required turn is <strong>A left.</strong>"
       }
@@ -555,6 +555,7 @@
       });
     });
 
+    renderCase(0);
     bindToolPreview();
   </script>
 </body>
