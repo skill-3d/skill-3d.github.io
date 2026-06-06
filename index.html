@@ -9,6 +9,180 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+
+  <style id="case-collapsible-override">
+    /* Case question / answer collapsible text: one line by default, no visible hint text. */
+    .case-question,
+    .case-answer {
+      cursor: pointer;
+      transition: background .16s ease, box-shadow .16s ease;
+    }
+
+    .case-question.case-collapsed,
+    .case-answer.case-collapsed {
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      white-space: normal;
+    }
+
+    .case-question:hover,
+    .case-answer:hover {
+      box-shadow: inset 0 0 0 2px rgba(47, 128, 237, .12);
+    }
+
+    .expand-hint,
+    .collapse-hint,
+    .expand-toggle,
+    .text-expand-hint,
+    .case-expand-hint {
+      display: none !important;
+    }
+
+
+    /* Tool output accordion preview restored: thumbnails are visible when a drawer is expanded. */
+    .tool-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .tool-drawer-item {
+      border: 1px solid rgba(31, 61, 90, 0.14);
+      border-radius: 18px;
+      background: rgba(248, 251, 255, 0.96);
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.72);
+    }
+
+    .tool-drawer-head {
+      width: 100%;
+      border: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.98), rgba(239,247,255,.96));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 18px;
+      cursor: pointer;
+      color: var(--dark);
+      font: inherit;
+      text-align: left;
+    }
+
+    .tool-drawer-head span {
+      font-size: 1.02rem;
+      font-weight: 900;
+      color: var(--dark);
+    }
+
+    .tool-drawer-head b {
+      font-size: .88rem;
+      font-weight: 850;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .tool-drawer-head::after {
+      content: "⌄";
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(92, 200, 200, .16);
+      color: #075985;
+      font-weight: 950;
+      transition: transform .16s ease;
+    }
+
+    .tool-drawer-item.open .tool-drawer-head::after {
+      transform: rotate(180deg);
+    }
+
+    .tool-drawer-body {
+      display: none;
+      padding: 0 16px 16px;
+      background: rgba(255,255,255,.72);
+    }
+
+    .tool-drawer-item.open .tool-drawer-body {
+      display: block;
+    }
+
+    .tool-output-strip {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(220px, 1fr);
+      gap: 12px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      padding: 4px 0 10px;
+      scrollbar-width: thin;
+    }
+
+    .tool-output-thumb {
+      position: relative;
+      border: 0;
+      padding: 0;
+      min-height: 150px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      cursor: pointer;
+      scroll-snap-align: start;
+      box-shadow: inset 0 0 0 1px rgba(31,61,90,.10), 0 8px 18px rgba(25,64,104,.08);
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    .tool-output-thumb:hover,
+    .tool-output-thumb:focus {
+      transform: translateY(-1px);
+      outline: none;
+      box-shadow: inset 0 0 0 2px rgba(47,128,237,.30), 0 12px 24px rgba(47,128,237,.14);
+    }
+
+    .tool-output-thumb img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+      background: #f8fbff;
+    }
+
+    .tool-output-thumb span {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, .78);
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 900;
+    }
+
+    @media (max-width: 760px) {
+      .tool-output-strip {
+        grid-auto-columns: minmax(170px, 85%);
+      }
+      .tool-output-thumb,
+      .tool-output-thumb img {
+        min-height: 120px;
+        height: 120px;
+      }
+    }
+
+  </style>
 </head>
 <body>
   <div class="animated-bg" aria-hidden="true">
@@ -22,11 +196,11 @@
     <nav class="nav container-wide">
       <a class="brand" href="#top">Skill-3D</a>
       <div class="nav-links" aria-label="Primary navigation">
-        <a href="#overview">Overview</a>
+        <a href="#overview">Motivation</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
         <a href="#analysis">Analysis</a>
-        <a href="#cases">Cases</a>
+        <a href="#cases">Qualitative Cases</a>
         <a href="#bibtex">BibTeX</a>
       </div>
     </nav>
@@ -65,18 +239,7 @@
                 <h3>Scene Memory</h3>
                 <p>Rollouts · tool outputs · success / failure traces</p>
               </div>
-              <div class="compact-center">
-                <div class="orbit">
-                  <span class="orbit-tag tag-top">Use Tools</span>
-                  <span class="orbit-tag tag-right">Refine</span>
-                  <span class="orbit-tag tag-bottom">Select</span>
-                  <span class="orbit-tag tag-left">Retrieve</span>
-                  <div class="core">
-                    <span>Skill-3D</span>
-                    <strong>Scene-Aware<br />Skills</strong>
-                  </div>
-                </div>
-              </div>
+              
               <div class="compact-card c-library">
                 <span class="step">03</span>
                 <h3>Skill Library</h3>
@@ -112,12 +275,13 @@
               <span><i class="r-skill"></i>Skill-3D</span>
             </div>
             <img class="static-radar-img" src="assets/results_radar.svg" alt="Radar chart comparing GPT-5.4, Think3D, and Skill-3D" />
-            <figcaption>Skill-3D improves representative spatial reasoning dimensions while preserving tool-grounded evidence.</figcaption>
+         
           </figure>
+          
         </div>
         <figure class="figure-card motivation-figure-card">
           <img src="assets/motivation.png" alt="Skill-3D motivation and overview" />
-          <figcaption>Scene-aware skills route each query to task-relevant tool workflows.</figcaption>
+          <figcaption>Skill-3D retrieves scene-aware skills to guide tool use for 3D spatial reasoning.</figcaption>
         </figure>
       </div>
       <div class="motivation-text-cards full-width">
@@ -143,14 +307,40 @@
           <p class="eyebrow">Method</p>
           <h2>Scene Memory, Skill Library, and skill-guided post-training.</h2>
         </div>
-        <figure class="wide-figure method-main-figure">
-          <img class="method-img" src="assets/main.png" alt="Skill-3D method overview" />
-          <figcaption>Overview of Skill-3D: scene-aware skill extraction, skill-guided inference, and skill-guided agentic post-training.</figcaption>
-        </figure>
-        <div class="cards three">
-          <article class="card info-hover" data-tip="Skill extraction"><h3>Scene-Aware Skill Extraction</h3><p>Successful rollouts are distilled into reusable workflows. Failed rollouts are attached as lessons and converted into fallback rules when they provide reliable corrections.</p></article>
-          <article class="card info-hover" data-tip="Skill-guided inference"><h3>Skill-Guided Inference</h3><p>Given a query, Skill-3D retrieves candidate static and dynamic skills, selects a compact subset, and uses them to guide evidence acquisition and final reasoning.</p></article>
-          <article class="card info-hover" data-tip="Agentic training"><h3>Skill-Guided Agentic Post-Training</h3><p>Skill-guided trajectories supervise compact MLLM agents through agentic SFT and GRPO, teaching them to select skills, call tools, and ground answers in evidence.</p></article>
+    
+        <div class="method-split-layout">
+          <figure class="method-figure-card">
+            <img class="method-img" src="assets/main.png" alt="Skill-3D method overview" />
+            <figcaption>
+              Overview of Skill-3D: scene-aware skill extraction, skill-guided inference, and skill-guided agentic post-training.
+            </figcaption>
+          </figure>
+    
+          <div class="method-text-panel">
+            <article class="method-step-card">
+              <span class="method-step-index">01</span>
+              <h3>Scene-Aware Skill Extraction</h3>
+              <p>
+                Successful rollouts become reusable workflows; failures become lessons.
+              </p>
+            </article>
+    
+            <article class="method-step-card">
+              <span class="method-step-index">02</span>
+              <h3>Skill-Guided Inference</h3>
+              <p>
+                Skill-3D retrieves relevant skills and uses a compact subset to guide tool use and reasoning.
+              </p>
+            </article>
+    
+            <article class="method-step-card">
+              <span class="method-step-index">03</span>
+              <h3>Skill-Guided Agentic Post-Training</h3>
+              <p>
+                Skill-guided trajectories train compact agents to select skills, call tools, and ground answers through SFT and GRPO.
+              </p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -232,78 +422,70 @@
       <div class="section-heading centered-heading">
         <p class="eyebrow">Qualitative Cases</p>
         <h2>Case Studies</h2>
-        <p class="section-desc center">
-          Click a case to inspect the input scene video, retrieved skills, tool workflow, and Skill-3D answer. 
-        </p>
-        <p class="section-desc center">
-        Click any tool chip to view its output.
-        </p>
       </div>
 
       <div class="case-thumb-grid" aria-label="Qualitative case selector">
         <button class="case-thumb active" type="button" data-case="0">
           <span>Case 1</span>
-          <strong>Object Counting</strong>
-          <p>Count object instances across multiple views while avoiding duplicate observations.</p>
+          <strong>Appearance Order</strong>
+          <p>Track first-time object appearances along the camera trajectory.</p>
         </button>
-      
-        <button class="case-thumb" type="button" data-case="1">
+        <button class="case-thumb " type="button" data-case="1">
           <span>Case 2</span>
           <strong>Object Size</strong>
-          <p>Estimate the physical size of a target object using detection, depth, and scale cues.</p>
+          <p>Estimate physical object size using detection, depth, and scale cues.</p>
         </button>
-      
-        <button class="case-thumb" type="button" data-case="2">
+        <button class="case-thumb " type="button" data-case="2">
           <span>Case 3</span>
           <strong>Direction</strong>
-          <p>Infer the relative direction between objects from scene geometry and orientation cues.</p>
+          <p>Infer relative direction from object grounding and orientation evidence.</p>
         </button>
-      
-        <button class="case-thumb" type="button" data-case="3">
+        <button class="case-thumb " type="button" data-case="3">
           <span>Case 4</span>
-          <strong>Room Size Estimation</strong>
-          <p>Estimate room-scale dimensions from layout, depth, and multi-view observations.</p>
+          <strong>Room Size</strong>
+          <p>Estimate room dimensions from 3D Reconstruction, depth, and multi-view cues.</p>
         </button>
-      
-        <button class="case-thumb" type="button" data-case="4">
+        <button class="case-thumb " type="button" data-case="4">
           <span>Case 5</span>
-          <strong>Appearance Order</strong>
-          <p>Determine which object appears earlier along the camera trajectory.</p>
+          <strong>Object Counting</strong>
+          <p>Count repeated objects across views while avoiding duplicate observations.</p>
         </button>
-      
-        <button class="case-thumb" type="button" data-case="5">
+        <button class="case-thumb " type="button" data-case="5">
           <span>Case 6</span>
           <strong>Route Planning</strong>
-          <p>Plan a feasible path between targets while respecting obstacles and room layout.</p>
+          <p>Plan a feasible route using layout, object, and obstacle evidence.</p>
         </button>
       </div>
 
       <article class="case-expanded" id="caseExpanded">
         <div class="case-media-large">
-          <video id="caseVideo" src="assets/case_1.mp4" poster="assets/case_1.png" autoplay muted loop playsinline controls></video>
+          <video id="caseVideo" src="assets/case_3.mp4" poster="assets/case_3.png" autoplay muted loop playsinline controls></video>
         </div>
 
         <div class="case-detail">
-          <div class="case-label" id="caseLabel">Case 1 · Object Counting</div>
+          <div class="case-label" id="caseLabel">Case 1 · Appearance Order</div>
 
-          <div class="case-question" id="caseQuestion">
-            How many monitor(s) are in this room?
-          </div>
+          <div class="case-question" id="caseQuestion">What will be the first-time appearance order of the following categories in the video: basket, door, pillow, laptop?
+Select from the following choices.
+(A) A. basket, pillow, door, laptop
+(B) B. pillow, door, laptop, basket
+(C) C. basket, door, pillow, laptop
+(D) D. door, basket, pillow, laptop</div>
 
           <div class="case-skills" id="caseSkills">
-            <span class="skill-chip dynamic">#dy_06 · object_counting</span>
-            <span class="skill-chip static">#st_01 · object_grounding</span>
+            <span class="skill-chip dynamic">#dy_14 · appearance_order</span>
+            <span class="skill-chip static">#st_06 · temporal_cue</span>
           </div>
 
           <div class="tool-row tool-preview-row" id="caseTools">
-            <span class="tool-chip" tabindex="0" role="button" data-tool-title="3D Reconstruction Output" data-previews="assets/case_1_pi3.png" data-fallback="assets/case_1.png">3D Reconstruction</span>
+            <span class="tool-chip" tabindex="0" role="button" data-tool-title="Object Detection Output" data-previews="assets/case5_detect1.jpg|assets/case5_detect2.jpg|assets/case5_detect3.jpg" data-fallback="assets/case_3.png">Object Detection</span>
             <i>→</i>
-            <span class="tool-chip" tabindex="0" role="button" data-tool-title="Object Detection Output" data-previews="assets/case_1_objdet_1.png|assets/case_1_objdet_2.png|assets/case_1_objdet_3.png|assets/case_1_objdet_4.png" data-fallback="assets/case_1.png">Object Detection</span>
+            <span class="tool-chip" tabindex="0" role="button" data-tool-title="Image Segmentation Output" data-previews="assets/case5_seg1.png|assets/case5_seg2.png|assets/case5_seg3.png|assets/case5_seg4.png" data-fallback="assets/case_3.png">Image Segmentation</span>
           </div>
 
-          <div class="case-answer" id="caseAnswer">
-            Object detection localizes monitor candidates across views, while segmentation refines object boundaries and separates adjacent monitors. After cross-view de-duplication, the final monitor count is <strong>4</strong>.
-          </div>
+          <div class="tool-accordion" id="caseToolAccordion" aria-label="Tool output previews"></div>
+
+          <div class="case-answer" id="caseAnswer">Object detection localizes pillow, door, laptop, and basket candidates throughout the video, while segmentation refines their boundaries and ensures consistent object identity across views. The temporal-cue skill then tracks the first frame in which each segmented object appears. The pillow is detected in the initial bedroom scene, followed by the door as the camera moves through the room. The laptop becomes visible later on the desk, and the basket only appears in the final views. Therefore, the first-time appearance order is <strong>B. pillow → door → laptop → basket</strong>.</div>
         </div>
       </article>
 
@@ -317,7 +499,7 @@
           </div>
           <div class="tool-modal-viewer">
             <button class="tool-modal-nav prev" type="button" aria-label="Previous output">‹</button>
-            <img id="toolModalImg" src="assets/case_1.png" alt="Tool output preview" />
+            <img id="toolModalImg" src="assets/case_3.png" alt="Tool output preview" />
             <button class="tool-modal-nav next" type="button" aria-label="Next output">›</button>
           </div>
           <div class="tool-modal-dots" id="toolModalDots" aria-label="Tool output pagination"></div>
@@ -360,79 +542,208 @@
 
     const CASES = [
       {
-        label: "Case 1 · Object Counting",
-        video: "assets/case_1.mp4",
-        poster: "assets/case_1.png",
-        question: "How many monitor(s) are in this room?",
-        skills: [["dynamic", "#dy_06 · object_counting"], ["static", "#st_01 · object_counting"]],
-        tools: [
-          { name: "Reconstruction", previews: ["assets/case1_pi3.png"] },
-          { name: "Object Detection", previews: ["assets/case1_detected_1.jpg", "assets/case1_detected_2.jpg", "assets/case1_detected_3.jpg", "assets/case1_detected_4.jpg"] }
-        ],
-        answer: "Object detection localizes monitor candidates across views, while segmentation refines object boundaries and separates adjacent monitors. After cross-view de-duplication, the final monitor count is <strong>4</strong>."
+            "label": "Case 1 · Appearance Order",
+            "video": "assets/case_3.mp4",
+            "poster": "assets/case_3.png",
+            "question": "What will be the first-time appearance order of the following categories in the video: basket, door, pillow, laptop?\nSelect from the following choices.\n(A) A. basket, pillow, door, laptop\n(B) B. pillow, door, laptop, basket\n(C) C. basket, door, pillow, laptop\n(D) D. door, basket, pillow, laptop",
+            "skills": [
+                  [
+                        "dynamic",
+                        "#dy_14 · appearance_order"
+                  ],
+                  [
+                        "static",
+                        "#st_06 · temporal_cue"
+                  ]
+            ],
+            "tools": [
+                  {
+                        "name": "Object Detection",
+                        "previews": [
+                              "assets/case5_detect1.jpg",
+                              "assets/case5_detect2.jpg",
+                              "assets/case5_detect3.jpg"
+                        ]
+                  },
+                  {
+                        "name": "Image Segmentation",
+                        "previews": [
+                              "assets/case5_seg1.png",
+                              "assets/case5_seg2.png",
+                              "assets/case5_seg3.png",
+                              "assets/case5_seg4.png"
+                        ]
+                  }
+            ],
+            "answer": "Object detection localizes pillow, door, laptop, and basket candidates throughout the video, while segmentation refines their boundaries and ensures consistent object identity across views. The temporal-cue skill then tracks the first frame in which each segmented object appears. The pillow is detected in the initial bedroom scene, followed by the door as the camera moves through the room. The laptop becomes visible later on the desk, and the basket only appears in the final views. Therefore, the first-time appearance order is <strong>B. pillow → door → laptop → basket</strong>."
       },
       {
-        label: "Case 2 · Object Size",
-        video: "assets/case_2.mp4",
-        poster: "assets/case_2.png",
-        question: "What is the length of the longest dimension (length, width, or height) of the table, measured in centimeters?",
-        skills: [["dynamic", "#dy_11 · object_size_estimation"], ["static", "#st_03 · object_size_estimation"]],
-        tools: [
-          { name: "Object Detection", previews: ["assets/case2_detected_1.jpg"] },
-          { name: "Depth Estimation", previews: ["assets/case2_depth.png"] },
-        ],
-        answer: "Object detection localizes the table region, while the depth map confirms that the detected surface is a large, planar object extending across the scene rather than a small foreground tabletop. Its dark green top, white boundary lines, and elongated proportions match a standard ping-pong table. The depth-supported spatial extent is also more consistent with the standard 9 ft by 5 ft format than with a typical dining table. Therefore, the longest dimension is estimated as <strong>274 cm<strong>."
-
+            "label": "Case 2 · Object Size",
+            "video": "assets/case_2.mp4",
+            "poster": "assets/case_2.png",
+            "question": "What is the length of the longest dimension (length, width, or height) of the table, measured in centimeters?",
+            "skills": [
+                  [
+                        "dynamic",
+                        "#dy_11 · object_size_estimation"
+                  ],
+                  [
+                        "static",
+                        "#st_03 · object_size_estimation"
+                  ]
+            ],
+            "tools": [
+                  {
+                        "name": "Object Detection",
+                        "previews": [
+                              "assets/case2_detected_1.jpg"
+                        ]
+                  },
+                  {
+                        "name": "Depth Estimation",
+                        "previews": [
+                              "assets/case2_depth.png"
+                        ]
+                  }
+            ],
+            "answer": "Object detection localizes the table region, while the depth map confirms that the detected surface is a large, planar object extending across the scene rather than a small foreground tabletop. Its dark green top, white boundary lines, and elongated proportions match a standard ping-pong table. The depth-supported spatial extent is also more consistent with the standard 9 ft by 5 ft format than with a typical dining table. Therefore, the longest dimension is estimated as <strong>274 cm</strong>."
       },
       {
-        label: "Case 3 · Direction",
-        video: "assets/case_5.mp4",
-        poster: "assets/case_5.png",
-        question: "If I am standing by the fireplace and facing the table, is the stove to my front-left, front-right, back-left, or back-right?.\nSelect from the following choices.\n(A) A. back-right\n(B) B. front-right\n(C) C. front-left\n(D) D. back-left\n",
-        skills: [["dynamic", "#dy_09 · object_relative_direction"], ["static", "#st_05 · object_relative_direction"]],
-        tools: [
-          { name: "Orient Estimation", previews: ["assets/case3_orient_1.png"] },
-          { name: "Object Detection", previews: ["assets/case3_detect.jpg", "assets/case3_detect_2.jpg"] },
-        ],
-        answer: "The detected scene places the fireplace on the right side of the view and the table farther ahead/left. Orient Anything is then used to estimate the local facing direction and convert the image-space layout into an egocentric direction frame. Under this orientation, standing by the fireplace and facing the table makes the table the forward reference direction. The stove is localized further left relative to this facing direction, placing it in the front-left quadrant. So the answer is <strong>C</strong>."
+            "label": "Case 3 · Direction",
+            "video": "assets/case_5.mp4",
+            "poster": "assets/case_5.png",
+            "question": "If I am standing by the fireplace and facing the table, is the stove to my front-left, front-right, back-left, or back-right?\nSelect from the following choices.\n(A) A. back-right\n(B) B. front-right\n(C) C. front-left\n(D) D. back-left",
+            "skills": [
+                  [
+                        "dynamic",
+                        "#dy_09 · object_relative_direction"
+                  ],
+                  [
+                        "static",
+                        "#st_05 · object_relative_direction"
+                  ]
+            ],
+            "tools": [
+                  {
+                        "name": "Orient Estimation",
+                        "previews": [
+                              "assets/case3_orient_1.png"
+                        ]
+                  },
+                  {
+                        "name": "Object Detection",
+                        "previews": [
+                              "assets/case3_detect.jpg",
+                              "assets/case3_detect_2.jpg"
+                        ]
+                  }
+            ],
+            "answer": "The detected scene places the fireplace on the right side of the view and the table farther ahead/left. Orient Anything is then used to estimate the local facing direction and convert the image-space layout into an egocentric direction frame. Under this orientation, standing by the fireplace and facing the table makes the table the forward reference direction. The stove is localized further left relative to this facing direction, placing it in the front-left quadrant. So the answer is <strong>C. front-left</strong>."
       },
       {
-        label: "Case 4 · Room Size Estimation",
-        video: "assets/case_4.mp4",
-        poster: "assets/case_4.png",
-        question: "What is the size of this room (in square meters)? ",
-        skills: [["dynamic", "#dy_10 · room_size_estimation"], ["static", "#st_08 · room_size_estimation"]],
-        tools: [
-          { name: "Reconstruction", previews: ["assets/case4_pi3.png"] },
-          { name: "Depth Estimation", previews: ["assets/case4_depth1.png", "assets/case4_depth2.png", "assets/case4_depth3.png", "assets/case4_depth4.png", "assets/case4_depth5.png"] }
-        ],
-        answer: " The reconstruction provides the room-level rectangular layout and separates the bed, desk, wall, and window regions, while the depth output gives metric scale: the main surfaces are around 3.0--3.7 m from the camera, with the bed and window wall near 3 m and the desk area slightly farther. Combining the reconstructed floor layout with these depth cues suggests a compact bedroom/office of roughly 3.0 m by 3.6 m, or about 10.8 m². Considering furniture occlusion and partial visibility, the closest reasonable estimate is <strong>11 m²</strong>."
+            "label": "Case 4 · Room Size",
+            "video": "assets/case_4.mp4",
+            "poster": "assets/case_4.png",
+            "question": "What is the size of this room (in square meters)?",
+            "skills": [
+                  [
+                        "dynamic",
+                        "#dy_10 · room_size_estimation"
+                  ],
+                  [
+                        "static",
+                        "#st_08 · room_size_estimation"
+                  ]
+            ],
+            "tools": [
+                  {
+                        "name": "3D Reconstruction",
+                        "previews": [
+                              "assets/case4_pi3.png"
+                        ]
+                  },
+                  {
+                        "name": "Depth Estimation",
+                        "previews": [
+                              "assets/case4_depth1.png",
+                              "assets/case4_depth2.png",
+                              "assets/case4_depth3.png",
+                              "assets/case4_depth4.png",
+                              "assets/case4_depth5.png"
+                        ]
+                  }
+            ],
+            "answer": "The 3D Reconstruction provides the room-level rectangular layout and separates the bed, desk, wall, and window regions, while the depth output gives metric scale: the main surfaces are around 3.0--3.7 m from the camera, with the bed and window wall near 3 m and the desk area slightly farther. Combining the reconstructed floor layout with these depth cues suggests a compact bedroom/office of roughly 3.0 m by 3.6 m, or about 10.8 m². Considering furniture occlusion and partial visibility, the closest reasonable estimate is <strong>11 m²</strong>."
       },
       {
-        label: "Case 5 · Appearance Order",
-        video: "assets/case_3.mp4",
-        poster: "assets/case_3.png",
-        question: "What will be the first-time appearance order of the following categories in the video: basket, door, pillow, laptop?\nSelect from the following choices.\n(A) A. basket, pillow, door, laptop\n(B) B. pillow, door, laptop, basket\n(C) C. basket, door, pillow, laptop\n(D) D. door, basket, pillow, laptop\n",
-        skills: [["dynamic", "#dy_14 · appearance_order"], ["static", "#st_06 · temporal_cue"]],
-        tools: [
-          { name: "Object Detection", previews: ["assets/case5_detect1.jpg", "assets/case5_detect2.jpg", "assets/case5_detect3.jpg"] },
-          { name: "Segmentation", previews: ["assets/case5_seg1.png", "assets/case5_seg2.png", "assets/case5_seg3.png","assets/case5_seg4.png"] }
-        ],
-        answer: "Object detection localizes pillow, door, laptop, and basket candidates throughout the video, while segmentation refines their boundaries and ensures consistent object identity across views. The temporal-cue skill then tracks the first frame in which each segmented object appears. The pillow is detected in the initial bedroom scene, followed by the door as the camera moves through the room. The laptop becomes visible later on the desk, and the basket only appears in the final views. Therefore, the first-time appearance order is <strong>B. pillow → door → laptop → basket</strong>."
+            "label": "Case 5 · Object Counting",
+            "video": "assets/case_1.mp4",
+            "poster": "assets/case_1.png",
+            "question": "How many monitor(s) are in this room?",
+            "skills": [
+                  [
+                        "dynamic",
+                        "#dy_06 · object_counting"
+                  ],
+                  [
+                        "static",
+                        "#st_01 · object_counting"
+                  ]
+            ],
+            "tools": [
+                  {
+                        "name": "3D Reconstruction",
+                        "previews": [
+                              "assets/case1_pi3.png"
+                        ]
+                  },
+                  {
+                        "name": "Object Detection",
+                        "previews": [
+                              "assets/case1_detected_1.jpg",
+                              "assets/case1_detected_2.jpg",
+                              "assets/case1_detected_3.jpg",
+                              "assets/case1_detected_4.jpg"
+                        ]
+                  }
+            ],
+            "answer": "Object detection localizes monitor candidates across views, while segmentation refines object boundaries and separates adjacent monitors. After cross-view de-duplication, the final monitor count is <strong>4</strong>."
       },
       {
-        label: "Case 6 · Route Planning",
-        video: "assets/case_6.mp4",
-        poster: "assets/case_6.png",
-        question: "You are a robot beginning at the blue chair and facing the fan beside the boxes. You want to navigate to the trash bin. You will perform the following actions (Note: for each [please fill in], choose either 'turn back,' 'turn left,' or 'turn right.'): 1. Go forward until passing the tables on the right. 2. [please fill in] 3. Go forward until the trash bin. You have reached the final destination.\nSelect from the following choices.\n(A) A. Turn Left\n(B) B. Turn Back\n(C) C. Turn Right\n",
-        skills: [["dynamic", "#dy_15 · route_planning"], ["static", "#st_05 · layout_grounding"]],
-        tools: [
-          { name: "Reconstruction", previews: ["assets/case6_pi3.png"] },
-          { name: "Object Detection", previews: ["assets/case6_detected_1.jpg", "assets/case6_detected2.jpg", "assets/case6_detected3.jpg", "assets/case6_detected4.jpg"] }
-        ],
-        answer: "Object detection localizes the blue chair, trash bins, fan, and back workbench across the sampled frames, while reconstruction connects these observations into a consistent spatial layout. Frames 4--6 place the fan beside the back workbench and the trash bins along the left side of the same back wall. In the reconstructed layout, starting from the blue-chair area and moving forward past the tables on the right leads into the aisle toward the back wall. Once approaching the back area, the detected trash bins lie to the left of the forward direction, so the required turn is <strong>A left.</strong>"
+            "label": "Case 6 · Route Planning",
+            "video": "assets/case_6.mp4",
+            "poster": "assets/case_6.png",
+            "question": "You are a robot beginning at the blue chair and facing the fan beside the boxes. You want to navigate to the trash bin. You will perform the following actions (Note: for each [please fill in], choose either 'turn back,' 'turn left,' or 'turn right.'): 1. Go forward until passing the tables on the right. 2. [please fill in] 3. Go forward until the trash bin. You have reached the final destination.\nSelect from the following choices.\n(A) A. Turn Left\n(B) B. Turn Back\n(C) C. Turn Right",
+            "skills": [
+                  [
+                        "dynamic",
+                        "#dy_15 · route_planning"
+                  ],
+                  [
+                        "static",
+                        "#st_05 · layout_grounding"
+                  ]
+            ],
+            "tools": [
+                  {
+                        "name": "3D Reconstruction",
+                        "previews": [
+                              "assets/case6_pi3.png"
+                        ]
+                  },
+                  {
+                        "name": "Object Detection",
+                        "previews": [
+                              "assets/case6_detected_1.jpg",
+                              "assets/case6_detected2.jpg",
+                              "assets/case6_detected3.jpg",
+                              "assets/case6_detected4.jpg"
+                        ]
+                  }
+            ],
+            "answer": "Object detection localizes the blue chair, trash bins, fan, and back workbench across the sampled frames, while 3D Reconstruction connects these observations into a consistent spatial layout. Frames 4--6 place the fan beside the back workbench and the trash bins along the left side of the same back wall. In the reconstructed layout, starting from the blue-chair area and moving forward past the tables on the right leads into the aisle toward the back wall. Once approaching the back area, the detected trash bins lie to the left of the forward direction, so the required turn is <strong>A. left</strong>."
       }
-    ];
+];
 
     const thumbs = document.querySelectorAll(".case-thumb");
     const caseExpanded = document.getElementById("caseExpanded");
@@ -441,6 +752,7 @@
     const caseQuestion = document.getElementById("caseQuestion");
     const caseSkills = document.getElementById("caseSkills");
     const caseTools = document.getElementById("caseTools");
+    const caseToolAccordion = document.getElementById("caseToolAccordion");
     const caseAnswer = document.getElementById("caseAnswer");
 
     const toolModal = document.getElementById("toolModal");
@@ -476,12 +788,12 @@
       });
     }
 
-    function openToolModal(title, previews, fallback) {
+    function openToolModal(title, previews, fallback, startIndex = 0) {
       modalTitle = title || "Tool Output";
       modalImages = previews.filter(Boolean);
       if (!modalImages.length) modalImages = [fallback || "assets/case_1.png"];
       modalFallback = fallback || modalImages[0];
-      modalIndex = 0;
+      modalIndex = Math.max(0, Math.min(startIndex, modalImages.length - 1));
       updateModal();
       toolModal.classList.add("open");
       toolModal.setAttribute("aria-hidden", "false");
@@ -517,7 +829,7 @@
       document.querySelectorAll(".tool-chip[data-previews]").forEach(chip => {
         const open = () => {
           const previews = chip.dataset.previews.split("|").map(s => s.trim()).filter(Boolean);
-          openToolModal(chip.dataset.toolTitle || `${chip.textContent.trim()} Output`, previews, chip.dataset.fallback);
+          openToolModal(chip.dataset.toolTitle || `${chip.textContent.trim()} Output`, previews, chip.dataset.fallback, 0);
         };
         chip.addEventListener("click", open);
         chip.addEventListener("keydown", event => {
@@ -526,6 +838,71 @@
             open();
           }
         });
+      });
+    }
+
+    function renderToolAccordion(tools, fallback) {
+      caseToolAccordion.innerHTML = tools.map((tool, i) => {
+        const previews = tool.previews || [];
+        const previewAttr = escapeAttr(previews.join("|"));
+        const title = `${tool.name} Output`;
+        const thumbs = previews.map((src, j) => `
+          <button class="tool-output-thumb" type="button" data-tool-title="${escapeAttr(title)}" data-previews="${previewAttr}" data-preview-index="${j}" data-fallback="${escapeAttr(fallback)}" aria-label="Open ${escapeAttr(title)} ${j + 1}">
+            <img src="${escapeAttr(src)}" alt="${escapeAttr(title)} ${j + 1}" onerror="this.onerror=null;this.src='${escapeAttr(fallback)}';" />
+            <span>${j + 1}</span>
+          </button>`).join("");
+        return `
+          <section class="tool-drawer-item ${i === 0 ? "open" : ""}">
+            <button class="tool-drawer-head" type="button" data-tool-panel="${i}">
+              <span>${tool.name}</span>
+              <b>${previews.length} output${previews.length > 1 ? "s" : ""}</b>
+            </button>
+            <div class="tool-drawer-body">
+              <div class="tool-output-strip">
+                ${thumbs}
+              </div>
+            </div>
+          </section>`;
+      }).join("");
+
+      caseToolAccordion.querySelectorAll(".tool-drawer-head").forEach(head => {
+        head.addEventListener("click", () => {
+          const item = head.closest(".tool-drawer-item");
+          item.classList.toggle("open");
+        });
+      });
+
+      caseToolAccordion.querySelectorAll(".tool-output-thumb").forEach(thumb => {
+        thumb.addEventListener("click", () => {
+          const previews = thumb.dataset.previews.split("|").map(s => s.trim()).filter(Boolean);
+          const startIndex = Number(thumb.dataset.previewIndex || 0);
+          openToolModal(thumb.dataset.toolTitle, previews, thumb.dataset.fallback, startIndex);
+        });
+      });
+    }
+
+
+    function removeExpandHintText(block) {
+      block.querySelectorAll('.expand-hint, .collapse-hint, .expand-toggle, .text-expand-hint, .case-expand-hint').forEach(el => el.remove());
+      [...block.childNodes].forEach(node => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          node.textContent = node.textContent
+            .replace(/Click to expand/gi, '')
+            .replace(/Click to collapse/gi, '')
+            .trimStart();
+        }
+      });
+    }
+
+    function bindCollapsibleText() {
+      [caseQuestion, caseAnswer].forEach(block => {
+        if (!block) return;
+        removeExpandHintText(block);
+        block.classList.add('case-collapsed');
+        block.removeAttribute('title');
+        block.onclick = () => {
+          block.classList.toggle('case-collapsed');
+        };
       });
     }
 
@@ -544,7 +921,9 @@
         const chip = `<span class="tool-chip" tabindex="0" role="button" data-tool-title="${escapeAttr(tool.name)} Output" data-previews="${escapeAttr(previews)}" data-fallback="${escapeAttr(data.poster)}">${tool.name}</span>`;
         return i === 0 ? chip : `<i>→</i>${chip}`;
       }).join("");
+      renderToolAccordion(data.tools, data.poster);
       caseAnswer.innerHTML = data.answer;
+      bindCollapsibleText();
       bindToolPreview();
     }
 
@@ -556,7 +935,6 @@
     });
 
     renderCase(0);
-    bindToolPreview();
   </script>
 </body>
 </html>
