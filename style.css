@@ -2857,4 +2857,172 @@ h1 {
     height: 120px !important;
   }
 }
+/* ==============================
+   Hero Project Buttons
+   ============================== */
 
+   .hero-button-row {
+    margin-top: 34px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+  }
+  
+  .hero-pill {
+    min-height: 58px;
+    padding: 0 34px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    border: 1px solid rgba(41, 77, 120, 0.12);
+    font-size: 1.05rem;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+    color: #1f2937;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow:
+      0 10px 26px rgba(25, 64, 104, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease,
+      border-color 0.18s ease,
+      background 0.18s ease;
+  }
+  
+  .hero-pill:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 16px 34px rgba(25, 64, 104, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.82);
+    border-color: rgba(41, 77, 120, 0.22);
+  }
+  
+  .hero-pill-gradient {
+    color: #ffffff;
+    border: 0;
+    background: linear-gradient(135deg, #6d45e4 0%, #d947a9 100%);
+    box-shadow: 0 16px 34px rgba(109, 69, 228, 0.28);
+  }
+  
+  .hero-pill-gradient:hover {
+    box-shadow: 0 20px 42px rgba(109, 69, 228, 0.34);
+  }
+  
+  .hero-pill-light {
+    background: rgba(255, 255, 255, 0.96);
+    color: #1f2937;
+  }
+  
+  .hero-pill-dark {
+    color: #ffffff;
+    border: 0;
+    background: #0f172a;
+    box-shadow: 0 16px 34px rgba(15, 23, 42, 0.26);
+  }
+  
+  .hero-pill-dark:hover {
+    background: #111c33;
+    box-shadow: 0 20px 42px rgba(15, 23, 42, 0.32);
+  }
+  
+  .hero-pill-hf {
+    color: #1f2937;
+    background: linear-gradient(135deg, #fff7df 0%, #ffffff 100%);
+    border-color: rgba(240, 184, 74, 0.32);
+  }
+  
+  .hero-pill-hf:hover {
+    border-color: rgba(240, 184, 74, 0.55);
+    box-shadow: 0 18px 38px rgba(240, 184, 74, 0.20);
+  }
+  
+  .hero-pill-wide {
+    padding-left: 42px;
+    padding-right: 42px;
+  }
+  
+  .pill-icon {
+    width: 23px;
+    height: 23px;
+    flex: 0 0 auto;
+  }
+  
+  .arxiv-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 26px;
+    padding: 0 8px;
+    border-radius: 8px;
+    color: #ffffff;
+    background: #b31b1b;
+    font-size: 0.72rem;
+    font-weight: 950;
+    letter-spacing: -0.02em;
+  }
+  
+  .hf-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 27px;
+    height: 27px;
+    border-radius: 999px;
+    background: #ffe08a;
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+  
+  @media (max-width: 1320px) {
+    .hero-button-row {
+      justify-content: center;
+    }
+  }
+  
+  @media (max-width: 720px) {
+    .hero-button-row {
+      gap: 12px;
+    }
+  
+    .hero-pill {
+      min-height: 50px;
+      padding: 0 22px;
+      font-size: 0.95rem;
+    }
+  
+    .hero-pill-wide {
+      padding-left: 26px;
+      padding-right: 26px;
+    }
+  }
+ /* ==============================
+   arXiv Light Red Button
+   ============================== */
+
+   .hero-pill-arxiv {
+    color: #1f2937;
+    border: 1.5px solid rgba(220, 38, 38, 0.64);
+    background: linear-gradient(135deg, #fff1f1 0%, #ffffff 100%);
+    box-shadow: 0 16px 34px rgba(220, 38, 38, 0.12);
+  }
+  
+  .hero-pill-arxiv:hover {
+    border-color: rgba(255, 4, 4, 0.945);
+    background: linear-gradient(135deg, #fee2e2 0%, #ffffff 100%);
+    box-shadow: 0 18px 38px rgba(220, 38, 38, 0.18);
+  }
+
+.arxiv-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2px;
+  flex: 0 0 auto;
+}
